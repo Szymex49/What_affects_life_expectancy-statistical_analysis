@@ -1,0 +1,8 @@
+---
+title: "Pakiety statystyczne"
+author: "Szymon Malec,  Michał Wiktorowski"
+date: "2022-10-13"
+output: pdf_document
+---
+
+
