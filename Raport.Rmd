@@ -1,7 +1,6 @@
 ---
 title: "Co wpływa na długość naszego życia?"
 author: "Szymon Malec, Michał Wiktorowski"
-date: "2022-12-11"
 output: pdf_document
 ---
 
@@ -9,15 +8,25 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
+
 ## Wstęp
-<!-- Akapit - 10 spacji -->
-|          W niniejszej pracy chcielibyśmy przeanalizować, jak poszczególne czynniki zewnętrzne wpływają na długość naszego życia. Jak się okazuje, jedne z nich są poważnym problemem, podczas gdy inne w niewielkim stopniu przyczyniają się na długość życia. Do analizy posłużymy się zbiorem danych charakteryzującym wiele państw świata pod kilkoma aspektami, między innymi takimi jak jakość edukacji, spożycie alkoholu, czy zapadalność na poszczególne choroby. Link do danych znajduje się [$\color{blue}{\text{tutaj}}$](https://www.kaggle.com/datasets/kumarajarshi/life-expectancy-who?fbclid=IwAR2HtwUPyioM4tHmuae7B2owTUB8q3XlmpP12LbTM9NYDsi4qtaWGOYoNDE).
+<!-- Akapit - 6 spacji -->
+|      W niniejszej pracy chcielibyśmy przeanalizować, jak poszczególne czynniki zewnętrzne wpływają na długość naszego życia. Jak się okazuje, jedne z nich są poważnym problemem, podczas gdy inne w niewielkim stopniu przyczyniają się na długość życia. Do analizy posłużymy się zbiorem danych charakteryzującym wiele państw świata pod kilkoma aspektami, między innymi takimi jak jakość edukacji, spożycie alkoholu, czy zapadalność na poszczególne choroby. Link do danych znajduje się [$\color{blue}{\text{tutaj}}$](https://www.kaggle.com/datasets/kumarajarshi/life-expectancy-who?fbclid=IwAR2HtwUPyioM4tHmuae7B2owTUB8q3XlmpP12LbTM9NYDsi4qtaWGOYoNDE).
+
+
+## Opis danych
+
+
+## Analiza
+
+
+## Polska
+
 
 ## Jak długo żyją inni?
-|          Jak już wspomnieliśmy - długość życia zależy od wielu czynników i dla każdego państwa na świecie inaczej się one charakteryzują. Rozważmy na początku dane z 2015 roku - najnowsze, którymi dysponujemy. Średnia długość życia na globie wyniosła wtedy 71,62 lata. Jednak rozrzut danych dla poszczególnych państw jest duży. Mianem najdłużej żyjących ludzi mogli się wtedy poszczycić Słoweńczycy z imponującą średnią życia aż 88 lat. Natomiast najkrócej żyjącymi ludźmi okazali się być obywatele Sierra Leony z wynikiem zaledwie 51 lat. Polacy osiągneli wynik 77.5 lat, co stawia nas na 42 miejscu w rankingu - wynik dobry, ale nie najlepszy.
+|      Jak już wspomnieliśmy - długość życia zależy od wielu czynników i dla każdego państwa na świecie inaczej się one charakteryzują. Rozważmy na początku dane z 2015 roku - najnowsze, którymi dysponujemy. Średnia długość życia na globie wyniosła wtedy 71,62 lata. Jednak rozrzut danych dla poszczególnych państw jest duży. Mianem najdłużej żyjących ludzi mogli się wtedy poszczycić Słoweńczycy z imponującą średnią życia aż 88 lat. Natomiast najkrócej żyjącymi ludźmi okazali się być obywatele Sierra Leony z wynikiem zaledwie 51 lat. Polacy osiągneli wynik 77.5 lat, co stawia nas na 42 miejscu w rankingu - wynik dobry, ale nie najlepszy.
 
-\center
-```{r, echo = FALSE, fig.width = 5, fig.height = 4}
+```{r, echo = FALSE, fig.width = 5, fig.height = 4, fig.align="center"}
 library('ggplot2')
 library('dplyr')
 
@@ -36,4 +45,6 @@ bar2 <- ggplot(data = rbind(head(df2, 5), df2[df2$country == 'Poland',], tail(df
 
 bar2
 ```
-\center
+
+
+## Podsumowanie
