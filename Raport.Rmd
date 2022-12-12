@@ -18,6 +18,9 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 
 ## Analiza
+|      Aby przeanalizować, co najbardziej wpływa na długość życia, musimy sprawdzić czy poszczególne zbiory danych są od siebie zależne, czy występuje między nimi pewna korelacja. W tym celu posłużymy się wykresami punktowymi i na ich podstawie wybierzemy odpowiednie narzędzia do badania korelacji.
+$$tu miejsce na scattery$$
+Od razu możemy zauważyć, że rozrzut punktów na poszczególnych wykresach jest bardzo zróżnicowany. Na jednych wydaje się on być całkowicie losowy, natomiast na innych widać pewną zależność. Ze względu na to zróżnicowanie, nie użyjemy do sprawdzenia korelacji współczynnika Pearsona - sprawdza on jedynie zależność liniową. Można za to wykorzystać współczynnik korelacji Spearmana, który sprawdza zależność monotoniczną między danymi.
 
 
 ## Polska
