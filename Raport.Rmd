@@ -12,7 +12,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, result='hide', warning=FALSE, message=FALSE, error=FALSE}
 library(ggplot2)
 library(dplyr)
 library(zeallot)
