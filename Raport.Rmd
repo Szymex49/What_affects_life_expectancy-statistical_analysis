@@ -9,10 +9,10 @@ output:
 \raggedbottom
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, eval = TRUE)
 ```
 
-```{r, echo=FALSE, result='hide', warning=FALSE, message=FALSE, error=FALSE}
+```{r}
 library(ggplot2)
 library(dplyr)
 library(zeallot)
@@ -21,18 +21,19 @@ library(knitr)
 ```
 
 
-## Wstęp
+# Wstęp
 <!-- Akapit - 6 spacji -->
 |      W niniejszej pracy chcielibyśmy przeanalizować, jak poszczególne czynniki zewnętrzne wpływają na długość naszego życia. Jak się okazuje, jedne z nich są poważnym problemem, podczas gdy inne w niewielkim stopniu przyczyniają się na długość życia. Do analizy posłużymy się zbiorem danych charakteryzującym wiele państw świata pod kilkoma aspektami, między innymi takimi jak jakość edukacji, spożycie alkoholu, czy zapadalność na poszczególne choroby. Link do danych znajduje się [$\color{blue}{\text{tutaj}}$](https://www.kaggle.com/datasets/kumarajarshi/life-expectancy-who?fbclid=IwAR2HtwUPyioM4tHmuae7B2owTUB8q3XlmpP12LbTM9NYDsi4qtaWGOYoNDE).
 
 
-## Opis danych
+# Opis danych
 
 
-## Braki w danych
+# Braki w danych
 |      Zanim rozpoczniemy analizować nasze dane, sprawdźmy, czy zawierają one jakieś braki.
 
 ```{r, echo=FALSE}
+knitr::opts_chunk$set(fig.width=6, fig.height=9) 
 data <- read.csv("data.csv")
 
 nans <- data.frame()
@@ -51,26 +52,44 @@ names(nans) <- colnames(data[c(2, 4:22)])
 kable(t(nans))
 ```
 
+# Devoloped a developing
 
-## Devoloped a developing
 
-
-## Analiza
+# Analiza
 |      Aby przeanalizować, co najbardziej wpływa na długość życia, musimy sprawdzić czy poszczególne zbiory danych są od siebie zależne, czy występuje między nimi pewna korelacja. W tym celu posłużymy się wykresami punktowymi i na ich podstawie wybierzemy odpowiednie narzędzia do badania korelacji.
-$$tu miejsce na scattery$$
-Od razu możemy zauważyć, że rozrzut punktów na poszczególnych wykresach jest bardzo zróżnicowany. Na jednych wydaje się on być całkowicie losowy, natomiast na innych widać pewną zależność. Ze względu na to zróżnicowanie, nie użyjemy do sprawdzenia korelacji współczynnika Pearsona - sprawdza on jedynie zależność liniową. Można za to wykorzystać współczynnik korelacji Spearmana, który sprawdza zależność monotoniczną między danymi.
 
 
-## Polska
+\begin{figure}[H]
+```{r, echo=FALSE, fig.align="center"}
+data[4:22] %>%
+  gather(-life_expectancy, key = "var", value = "value") %>% 
+  ggplot(aes(x = value, y = life_expectancy)) +
+    geom_point(size=0.4, alpha=0.4, col='#0575d0', stroke=0) +
+    facet_wrap(~ var, scales='free', nrow=6) + 
+  ggtitle("Wykresikiii") + 
+  scale_x_discrete() + 
+  scale_y_discrete() + theme(
+  plot.title = element_text(hjust = 0.5, size = 24),
+)
+```
+\caption{Zależność długości życia od poszczególnych czynników}
+\end{figure}
 
 
-## Jak długo żyją inni?
+Od razu możemy zauważyć, że rozrzut punktów na poszczególnych wykresach jest bardzo zróżnicowany. Na jednych wydaje się on być całkowicie losowy, natomiast na innych widać pewną zależność. Ze względu na to zróżnicowanie, nie użyjemy do sprawdzenia korelacji współczynnika Pearsona - sprawdza on jedynie zależność liniową. Można za to wykorzystać współczynnik korelacji Spearmana, który sprawdza zależność monotoniczną między danymi. Ze względu na silną korelację, poddamy głębszej analizie dwa czynniki - długość edukacji, oraz produkt krajowy brutto.
+
+### Edukacja
+### PKB
+
+
+# Polska
+
+
+# Jak długo żyją inni?
 |      Jak już wspomnieliśmy - długość życia zależy od wielu czynników i dla każdego państwa na świecie inaczej się one charakteryzują. Rozważmy na początku dane z 2015 roku - najnowsze, którymi dysponujemy. Średnia długość życia na globie wyniosła wtedy 71,62 lata. Jednak rozrzut danych dla poszczególnych państw jest duży. Mianem najdłużej żyjących ludzi mogli się wtedy poszczycić Słoweńczycy z imponującą średnią życia aż 88 lat. Natomiast najkrócej żyjącymi ludźmi okazali się być obywatele Sierra Leony z wynikiem zaledwie 51 lat. Polacy osiągneli wynik 77.5 lat, co stawia nas na 42 miejscu w rankingu - wynik dobry, ale nie najlepszy.
 
 \begin{figure}[H]
 ```{r, echo = FALSE, fig.width = 5, fig.height = 4, fig.align="center"}
-library('ggplot2')
-library('dplyr')
 
 df <- read.csv('data.csv', header = TRUE, sep = ',')
 
@@ -81,7 +100,6 @@ df2 <- arrange(df2, desc(life_expectancy))
 bar2 <- ggplot(data = rbind(head(df2, 5), df2[df2$country == 'Poland',], tail(df2, 5)), mapping = aes(reorder(country, -life_expectancy, sum), life_expectancy)) + 
   geom_bar(stat = 'identity', fill = c('light green', 'light green', 'light green', 'light green', 'light green', 'gold', 'orangered', 'orangered', 'orangered', 'orangered', 'orangered'), color = 'black') +
   theme(axis.text.x = element_text(angle = 90), axis.title.x = element_blank()) +
-  ggtitle('Life expectancy in 2015') +
   labs(y = 'Life expectancy') +
   geom_hline(yintercept = mean(df2$life_expectancy), color = 'purple')
 
@@ -91,4 +109,4 @@ bar2
 \end{figure}
 
 
-## Podsumowanie
+# Podsumowanie
