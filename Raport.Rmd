@@ -1,8 +1,12 @@
 ---
 title: "Co wpływa na długość naszego życia?"
 author: "Szymon Malec, Michał Wiktorowski"
-output: pdf_document
+output:
+  pdf_document: 
+    extra_dependencies: ["polski", "mathtools", "amsthm", "amssymb", "icomma", "upgreek", "xfrac", "scrextend", "float", "tabularx", "hyperref", "caption", "enumitem"]
 ---
+
+\raggedbottom
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
@@ -17,6 +21,13 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ## Opis danych
 
 
+## Braki w danych
+|      Zanim rozpoczniemy analizować nasze dane, sprawdźmy, czy zawierają one jakieś braki.
+
+
+## Devoloped a developing
+
+
 ## Analiza
 |      Aby przeanalizować, co najbardziej wpływa na długość życia, musimy sprawdzić czy poszczególne zbiory danych są od siebie zależne, czy występuje między nimi pewna korelacja. W tym celu posłużymy się wykresami punktowymi i na ich podstawie wybierzemy odpowiednie narzędzia do badania korelacji.
 $$tu miejsce na scattery$$
@@ -29,6 +40,7 @@ Od razu możemy zauważyć, że rozrzut punktów na poszczególnych wykresach je
 ## Jak długo żyją inni?
 |      Jak już wspomnieliśmy - długość życia zależy od wielu czynników i dla każdego państwa na świecie inaczej się one charakteryzują. Rozważmy na początku dane z 2015 roku - najnowsze, którymi dysponujemy. Średnia długość życia na globie wyniosła wtedy 71,62 lata. Jednak rozrzut danych dla poszczególnych państw jest duży. Mianem najdłużej żyjących ludzi mogli się wtedy poszczycić Słoweńczycy z imponującą średnią życia aż 88 lat. Natomiast najkrócej żyjącymi ludźmi okazali się być obywatele Sierra Leony z wynikiem zaledwie 51 lat. Polacy osiągneli wynik 77.5 lat, co stawia nas na 42 miejscu w rankingu - wynik dobry, ale nie najlepszy.
 
+\begin{figure}[H]
 ```{r, echo = FALSE, fig.width = 5, fig.height = 4, fig.align="center"}
 library('ggplot2')
 library('dplyr')
@@ -48,6 +60,8 @@ bar2 <- ggplot(data = rbind(head(df2, 5), df2[df2$country == 'Poland',], tail(df
 
 bar2
 ```
+\caption{Wykresik}
+\end{figure}
 
 
 ## Podsumowanie
