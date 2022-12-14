@@ -12,6 +12,14 @@ output:
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
+```{r, echo=FALSE}
+library(ggplot2)
+library(dplyr)
+library(zeallot)
+library(tidyr)
+library(knitr)
+```
+
 
 ## Wstęp
 <!-- Akapit - 6 spacji -->
@@ -23,6 +31,25 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 ## Braki w danych
 |      Zanim rozpoczniemy analizować nasze dane, sprawdźmy, czy zawierają one jakieś braki.
+
+```{r, echo=FALSE}
+data <- read.csv("data.csv")
+
+nans <- data.frame()
+years <- sort(unique(data$year))
+for (y in years) {
+    data_year <- data %>% filter(year == y)
+    ns <- c()
+    for (column in colnames(data_year[4:22])) {
+        n <- sum(is.na(data_year[column]))
+        ns <- append(ns, n)
+    }
+    nans <- rbind(nans, ns)
+}
+nans <- cbind(years, nans)
+names(nans) <- colnames(data[c(2, 4:22)])
+kable(t(nans))
+```
 
 
 ## Devoloped a developing
