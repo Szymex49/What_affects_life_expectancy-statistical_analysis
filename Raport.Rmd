@@ -145,8 +145,17 @@ kable(df)
 \newpage
 
 ### Edukacja
-|      Jako pierwsze przeanalizujemy wpływ czasu edukacji na oczekiwaną długość życia. Zależność w danych przypomina liniową (wykres o nazwie "schooling"). Do zbadania korelacji możemy zatem użyć współczynnika korelacji Pearsona. Przyjmuje wartość $R \approx 0,752$, więc jest to mocna korelacja. Dzięki niej możemy również dopasować do danych prostą regresji korzystając z metody najmniejszych kwadratów.
-
+|      Jako pierwsze przeanalizujemy wpływ czasu edukacji na oczekiwaną długość życia. W tym przypadku rozważymy dane wyłącznie z 2015 roku. Na wykresie \ref{fig:scatter_schooling} można zauważyć liniową zależność danych, zatem do zbadania korelacji możemy użyć współczynnika korelacji Pearsona. Przyjmuje wartość $R \approx 0,752$, więc jest to mocna korelacja. Dzięki niej możemy również dopasować do danych prostą regresji korzystając z metody najmniejszych kwadratów.
+Polega ona na znalezieniu takich współczynników $a, b$ dla których funkcja
+$$S(a,b) = \sum_{i = 1}^n (y_i - ax_i - b)^2$$
+przyjmuje wartość najmniejszą. Rozwiązaniem jest para współczynników
+$$
+    \begin{cases}
+      a = R\frac{S_y}{S_x} \\
+      b = \bar{y} - a\bar{x}
+    \end{cases}
+$$
+gdzie $R$ jest współczynnikiem korelacji Pearsona, a $S_x, S_y$ są próbkowymi odchyleniami standardowymi.
 ```{r}
 regression <- function(X, Y, display_plot=TRUE){
     r <- cor(X, Y, use="pairwise.complete.obs")
@@ -169,9 +178,12 @@ regression <- function(X, Y, display_plot=TRUE){
 ```
 
 ```{r scatter_schooling, fig.cap="\\label{fig:scatter_schooling} Prosta regresji dla danych", fig.align="center", fig.width = 4, fig.height = 3}
-df <- data[(!is.na(data$schooling)) & (!is.na(data$life_expectancy)),]
+
+df <- data[(!is.na(data$schooling)) & (!is.na(data$life_expectancy)) & (data$year == 2015),]
 regression(df$schooling, df$life_expectancy)
 ```
+
+\newpage
 |      Kolejnym punktem będzie analiza residuów. Sprawdźmy na histogramie jak wygląda rozkład wartości błędów.
 
 ```{r hist_schooling, fig.cap="\\label{fig:hist_schooling} Histogram residuów", fig.align="center", fig.width = 4, fig.height = 3}
@@ -182,7 +194,20 @@ e <- df$life_expectancy - a*df$schooling - b
 hist_e <- ggplot(data.frame(e = e), aes(e)) + geom_histogram(aes(y = after_stat(density)), fill = 'white', color = 'black')
 hist_e
 ```
-Kształt histogramu jest zbliżony do krzywej gaussowskiej. Sprawdźmy czy rozkład residuów jest z rozkładu normalnego. W tym celu posłużymy się testem Kołmogorowa-Smirnova. .....
+
+Kształt histogramu jest zbliżony do krzywej gaussowskiej. Sprawdźmy czy rozkład residuów jest z rozkładu normalnego. W tym celu posłużymy się testem Kołmogorowa-Smirnova. Przedstawmy hipotezy:
+
+\begin{itemize}
+\item $\mathcal{H}_0$: wartości residuów są z rozkładu normalnego
+\item $\mathcal{H}_1$: wartości residuów nie są z rozkładu normalnego
+\end{itemize}
+
+```{r, echo = FALSE, eval = FALSE}
+test <- ks.test(e, 'pnorm', mean(e), sd(e))
+test
+```
+
+Niech $\alpha = 0,05$ będzie poziomem istotności naszego testu. Wyznaczona p-wartość wynosi $p = 0,2532$. Ponieważ jest ona większa od wartości $\alpha$ to nie mamy podstaw do odrzucenia hipotezy zerowej i na zadanym poziomie istotności możemy przyjąć, że dane pochodzą z rozkładu normalnego. 
 
 ### PKB
 
