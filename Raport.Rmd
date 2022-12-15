@@ -53,6 +53,9 @@ kable(t(nans))
 ```
 
 # Devoloped a developing
+|      Jak wspomnieliśmy wyżej, dane są podzielone na dwie kategorie. Jedna z nich o nazwie 'developed' reprezentuje państwa wysoko rozwinięte. Natomiast drugą kategorią jest 'developing' i stanowi państwa słabiej rozwinięte. Są w niej zawaarte głównie państwa afrykańskie. Jako że poszczególne dane pośród tych dwóch kategorii mogą się zasadniczo różnić, przeanalizujemy je z osobna.
+
+|      Spodziewamy się, że w krajach lepiej rozwiniętych średnia długość życia jest dłuższa niż w krajach uboższych. żeby przekonać się, czy w rzeczywistości tak jest, 
 
 
 # Analiza
