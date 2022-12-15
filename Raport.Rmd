@@ -139,10 +139,9 @@ names(correlations) <- colnames(data[c(2, 5:22)])
 df <- data.frame(t(correlations), header=TRUE)
 names(df) <- lapply(df[1, ], as.character)
 df <- df[-1,1:16]
-df
+kable(df)
 ```
 
-Od razu możemy zauważyć, że rozrzut punktów na poszczególnych wykresach jest bardzo zróżnicowany. Na jednych wydaje się on być całkowicie losowy, natomiast na innych widać pewną zależność. Ze względu na to zróżnicowanie, nie użyjemy do sprawdzenia korelacji współczynnika Pearsona - sprawdza on jedynie zależność liniową. Można za to wykorzystać współczynnik korelacji Spearmana, który sprawdza zależność monotoniczną między danymi. Ze względu na silną korelację, poddamy głębszej analizie dwa czynniki - długość edukacji, oraz produkt krajowy brutto.
 \newpage
 
 ### Edukacja
