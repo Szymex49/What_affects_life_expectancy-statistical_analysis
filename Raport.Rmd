@@ -108,8 +108,9 @@ Na obu wykresach zauważyć można, że państwa lepiej rozwinięte wyróżniaj�
 # Analiza
 |      Jednym z głównych celów raportu jest sprawdzenie, które czynniki mają największy wpływ na długość życia. Dobrym początkiem będzie narysowanie wykresów punktowych długości życia od poszczególnych zmiennych. Wykresy takie dają wgląd na to, jak zachowują się dane oraz pozwalają ocenić, czy występuje między nimi jakaś korelacja. Dodatkowo skorzystamy ze współczynnika korelacji Spearmana, ponieważ jest to miara monotonicznej zależności, a właśnie takiej zależności szukamy. Wspomnianą korelację obliczymy między długością życia, a pozostałymi zmiennymi liczbowymi dla każdego roku z osobna.
 
+Od razu możemy zauważyć, że rozrzut punktów na poszczególnych wykresach jest bardzo zróżnicowany. Na jednych wydaje się on być całkowicie losowy, natomiast na innych widać pewną zależność. Ze względu na to zróżnicowanie, nie użyjemy do sprawdzenia korelacji współczynnika Pearsona - sprawdza on jedynie zależność liniową. Można za to wykorzystać współczynnik korelacji Spearmana, który sprawdza zależność monotoniczną między danymi. Ze względu na silną korelację, poddamy głębszej analizie dwa czynniki - długość edukacji, oraz produkt krajowy brutto.
 
-```{r scattery_le, fig.cap="\\label{fig:scattery_le} Scattery", fig.align="center"}
+```{r scattery_le, fig.cap="\\label{fig:scattery_le} Scattery", fig.align="center", fig.width = 5, fig.height = 8}
 data[4:22] %>%
   gather(-life_expectancy, key = "var", value = "value") %>% 
   ggplot(aes(x = value, y = life_expectancy)) +
@@ -142,8 +143,48 @@ df
 ```
 
 Od razu możemy zauważyć, że rozrzut punktów na poszczególnych wykresach jest bardzo zróżnicowany. Na jednych wydaje się on być całkowicie losowy, natomiast na innych widać pewną zależność. Ze względu na to zróżnicowanie, nie użyjemy do sprawdzenia korelacji współczynnika Pearsona - sprawdza on jedynie zależność liniową. Można za to wykorzystać współczynnik korelacji Spearmana, który sprawdza zależność monotoniczną między danymi. Ze względu na silną korelację, poddamy głębszej analizie dwa czynniki - długość edukacji, oraz produkt krajowy brutto.
+\newpage
 
 ### Edukacja
+|      Jako pierwsze przeanalizujemy wpływ czasu edukacji na oczekiwaną długość życia. Zależność w danych przypomina liniową (wykres o nazwie "schooling"). Do zbadania korelacji możemy zatem użyć współczynnika korelacji Pearsona. Przyjmuje wartość $R \approx 0,752$, więc jest to mocna korelacja. Dzięki niej możemy również dopasować do danych prostą regresji korzystając z metody najmniejszych kwadratów.
+
+```{r}
+regression <- function(X, Y, display_plot=TRUE){
+    r <- cor(X, Y, use="pairwise.complete.obs")
+    Sx <- sd(X)
+    Sy <- sd(Y)
+    a <- r * Sy / Sx
+    b <- mean(Y) - a * mean(X)
+
+    if(display_plot){
+        xs <- seq(min(X), max(X), 0.01)
+        plt <- ggplot() +
+            geom_point(aes(x=X, y=Y), alpha=0.5) +
+            geom_line(aes(x = xs, y = a * xs + b), linewidth=1, col="red")
+        show(plt)
+    }
+    else{
+      return(c(a, b))
+    }
+}
+```
+
+```{r scatter_schooling, fig.cap="\\label{fig:scatter_schooling} Prosta regresji dla danych", fig.align="center", fig.width = 4, fig.height = 3}
+df <- data[(!is.na(data$schooling)) & (!is.na(data$life_expectancy)),]
+regression(df$schooling, df$life_expectancy)
+```
+|      Kolejnym punktem będzie analiza residuów. Sprawdźmy na histogramie jak wygląda rozkład wartości błędów.
+
+```{r hist_schooling, fig.cap="\\label{fig:hist_schooling} Histogram residuów", fig.align="center", fig.width = 4, fig.height = 3}
+ab <- regression(df$schooling, df$life_expectancy, display_plot = FALSE)
+a <- ab[1]
+b <- ab[2]
+e <- df$life_expectancy - a*df$schooling - b
+hist_e <- ggplot(data.frame(e = e), aes(e)) + geom_histogram(aes(y = after_stat(density)), fill = 'white', color = 'black')
+hist_e
+```
+Kształt histogramu jest zbliżony do krzywej gaussowskiej. Sprawdźmy czy rozkład residuów jest z rozkładu normalnego. W tym celu posłużymy się testem Kołmogorowa-Smirnova. .....
+
 ### PKB
 
 
