@@ -69,7 +69,7 @@ kable(df)
 |      Aby przeanalizować, co najbardziej wpływa na długość życia, musimy sprawdzić czy poszczególne zbiory danych są od siebie zależne, czy występuje między nimi pewna korelacja. W tym celu posłużymy się wykresami punktowymi i na ich podstawie wybierzemy odpowiednie narzędzia do badania korelacji.
 
 
-```{r wykresik, fig.cap="\\label{fig:wykresik} Wykressss", fig.align="center"}
+```{r scattery_le, fig.cap="\\label{fig:scattery_le} Scattery", fig.align="center"}
 data[4:22] %>%
   gather(-life_expectancy, key = "var", value = "value") %>% 
   ggplot(aes(x = value, y = life_expectancy)) +
@@ -95,8 +95,7 @@ Od razu możemy zauważyć, że rozrzut punktów na poszczególnych wykresach je
 # Jak długo żyją inni?
 |      Jak już wspomnieliśmy - długość życia zależy od wielu czynników i dla każdego państwa na świecie inaczej się one charakteryzują. Rozważmy na początku dane z 2015 roku - najnowsze, którymi dysponujemy. Średnia długość życia na globie wyniosła wtedy 71,62 lata. Jednak rozrzut danych dla poszczególnych państw jest duży. Mianem najdłużej żyjących ludzi mogli się wtedy poszczycić Słoweńczycy z imponującą średnią życia aż 88 lat. Natomiast najkrócej żyjącymi ludźmi okazali się być obywatele Sierra Leony z wynikiem zaledwie 51 lat. Polacy osiągneli wynik 77.5 lat, co stawia nas na 42 miejscu w rankingu - wynik dobry, ale nie najlepszy.
 
-\begin{figure}[H]
-```{r, echo = FALSE, fig.width = 5, fig.height = 4, fig.align="center"}
+```{r barplot, fig.cap="\\label{fig:barplot} Polska a inne państwa", fig.width = 5, fig.height = 4, fig.align="center"}
 
 #średnia długość życia dla państw
 df <- data[data$year == 2015,]
@@ -110,8 +109,6 @@ bar2 <- ggplot(data = rbind(head(df, 5), df[df$country == 'Poland',], tail(df, 5
 
 bar2
 ```
-\caption{Wykresik}
-\end{figure}
 
 
 # Podsumowanie
