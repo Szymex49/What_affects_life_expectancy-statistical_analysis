@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.13)  15 DEC 2022 14:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.12.13)  15 DEC 2022 19:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -495,6 +495,9 @@ Package: enumitem 2019/06/20 v3.9 Customized lists
 \enitdp@description=\count306
 ) (./Raport.aux
 
+LaTeX Warning: Label `fig:le_developed_developing' multiply defined.
+
+
 LaTeX Warning: Label `fig:scattery_le' multiply defined.
 
 
@@ -722,43 +725,46 @@ Overfull \hbox (73.92122pt too wide) in paragraph at lines 208--208
 [1
 
 {c:/Users/szymo/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<Raport_files/figure-latex/scattery_le-1.pdf, id=59, 433.62pt x 650.43pt>
+<Raport_files/figure-latex/le_developed_developing-1.pdf, id=59, 361.35pt x 216.81pt>
+File: Raport_files/figure-latex/le_developed_developing-1.pdf Graphic file (type pdf)
+<use Raport_files/figure-latex/le_developed_developing-1.pdf>
+Package pdftex.def Info: Raport_files/figure-latex/le_developed_developing-1.pdf  used on input line 231.
+(pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
+<Raport_files/figure-latex/scattery_le-1.pdf, id=60, 469.755pt x 325.215pt>
 File: Raport_files/figure-latex/scattery_le-1.pdf Graphic file (type pdf)
 <use Raport_files/figure-latex/scattery_le-1.pdf>
-Package pdftex.def Info: Raport_files/figure-latex/scattery_le-1.pdf  used on input line 240.
-(pdftex.def)             Requested size: 433.63878pt x 650.45818pt.
-
-LaTeX Warning: Float too large for page by 22.02817pt on input line 245.
-
+Package pdftex.def Info: Raport_files/figure-latex/scattery_le-1.pdf  used on input line 249.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 258.
+(hyperref)                than one, level fixed on input line 267.
 
-<Raport_files/figure-latex/barplot-1.pdf, id=60, 361.35pt x 289.08pt>
+[2 <./Raport_files/figure-latex/le_developed_developing-1.pdf>] [3 <./Raport_files/figure-latex/scattery_le-1.pdf>]
+<Raport_files/figure-latex/barplot-1.pdf, id=90, 361.35pt x 289.08pt>
 File: Raport_files/figure-latex/barplot-1.pdf Graphic file (type pdf)
 <use Raport_files/figure-latex/barplot-1.pdf>
-Package pdftex.def Info: Raport_files/figure-latex/barplot-1.pdf  used on input line 282.
+Package pdftex.def Info: Raport_files/figure-latex/barplot-1.pdf  used on input line 291.
 (pdftex.def)             Requested size: 361.34912pt x 289.07928pt.
-[2] [3 <./Raport_files/figure-latex/scattery_le-1.pdf>] [4 <./Raport_files/figure-latex/barplot-1.pdf>] (./Raport.aux)
+[4 <./Raport_files/figure-latex/barplot-1.pdf>] (./Raport.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `Raport.out' has not changed.
-(rerunfilecheck)             Checksum: F7492396852A3690C0B8B02D09F6EEF5;1039.
+(rerunfilecheck)             Checksum: 61D7F4D01132702D7DEBC3E3382AFBE3;1040.
  ) 
 Here is how much of TeX's memory you used:
- 15276 strings out of 476893
- 260753 string characters out of 5822749
- 726732 words of memory out of 5000000
- 36234 multiletter control sequences out of 15000+600000
+ 15287 strings out of 476893
+ 261328 string characters out of 5822749
+ 726845 words of memory out of 5000000
+ 36243 multiletter control sequences out of 15000+600000
  519217 words of font info for 73 fonts, out of 8000000 for 9000
  34 hyphenation exceptions out of 8191
  108i,7n,106p,369b,536s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/Users/szymo/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}<c:/Users/szymo/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/szymo/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/szymo/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/szymo/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/szymo/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb>
-Output written on Raport.pdf (4 pages, 2440684 bytes).
+Output written on Raport.pdf (4 pages, 2411369 bytes).
 PDF statistics:
- 127 PDF objects out of 1000 (max. 8388607)
- 105 compressed objects within 2 object streams
- 28 named destinations out of 1000 (max. 500000)
- 91 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 134 PDF objects out of 1000 (max. 8388607)
+ 110 compressed objects within 2 object streams
+ 29 named destinations out of 1000 (max. 500000)
+ 96 words of extra memory for PDF output out of 10000 (max. 10000000)
 

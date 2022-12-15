@@ -20,6 +20,7 @@ library(dplyr)
 library(zeallot)
 library(tidyr)
 library(knitr)
+library(reshape2)
 
 data <- read.csv("data/data.csv")
 ```
@@ -36,9 +37,7 @@ data <- read.csv("data/data.csv")
 # Braki w danych
 |      Zanim rozpoczniemy analizować nasze dane, sprawdźmy, czy zawierają one jakieś braki.
 
-```{r}
-knitr::opts_chunk$set(fig.width=6, fig.height=9)
-
+```{r, fig.width=6, fig.height=9}
 nans <- data.frame()
 years <- sort(unique(data$year))
 for (y in years) {
@@ -62,7 +61,35 @@ kable(df)
 # Devoloped a developing
 |      Jak wspomnieliśmy wyżej, dane są podzielone na dwie kategorie. Jedna z nich o nazwie 'developed' reprezentuje państwa wysoko rozwinięte. Natomiast drugą kategorią jest 'developing' i stanowi państwa słabiej rozwinięte. Są w niej zawaarte głównie państwa afrykańskie. Jako że poszczególne dane pośród tych dwóch kategorii mogą się zasadniczo różnić, przeanalizujemy je z osobna.
 
-|      Spodziewamy się, że w krajach lepiej rozwiniętych średnia długość życia jest dłuższa niż w krajach uboższych. żeby przekonać się, czy w rzeczywistości tak jest, 
+|      Spodziewamy się, że w krajach lepiej rozwiniętych długość życia jest większa niż w krajach uboższych. Żeby przekonać się, czy w rzeczywistości tak jest, 
+
+```{r le_developed_developing, fig.cap="\\label{fig:le_developed_developing} Porównanie średniej długości życia dla krajów wysoko i słabo rozwiniętych", fig.align="center", fig.width = 5, fig.height = 3}
+
+data_developed <- data %>% filter(status == 'Developed')
+data_developing <- data %>% filter(status == 'Developing')
+
+le1 <- c()
+le2 <- c()
+years <- sort(unique(data$year))
+
+for (y in years) {
+    data_year <- data_developed %>% filter(year == y & !is.na(life_expectancy) & !is.na(population))
+    mean_lf <- sum(data_year$life_expectancy * data_year$population) / sum(data_year$population)
+    le1 <- append(le1, mean_lf)
+}
+
+for (y in years) {
+    data_year <- data_developing %>% filter(year == y & !is.na(life_expectancy) & !is.na(population))
+    mean_lf <- sum(data_year$life_expectancy * data_year$population) / sum(data_year$population)
+    le2 <- append(le2, mean_lf)
+}
+
+df <- melt(data.frame(years=years, y1=le1, y2=le2), id.var='years')
+ggplot() + 
+  geom_line(aes(x=years, y=le1, col='Developed')) + 
+  geom_line(aes(x=years, y=le2, col='Developing')) + 
+  scale_color_manual(values=c('#009000', 'red')) + xlab("Rok") + ylab("Średnia długość życia") + labs(col="")
+```
 
 
 # Analiza
@@ -74,9 +101,8 @@ data[4:22] %>%
   gather(-life_expectancy, key = "var", value = "value") %>% 
   ggplot(aes(x = value, y = life_expectancy)) +
     geom_point(size=0.4, alpha=0.4, col='#0575d0', stroke=0) +
-    facet_wrap(~ var, scales='free', nrow=6) + 
-  ggtitle("Wykresikiii") + 
-  scale_x_discrete() + 
+    facet_wrap(~ var, scales='free', nrow=6) +
+  scale_x_discrete() +
   scale_y_discrete() + theme(
   plot.title = element_text(hjust = 0.5, size = 24),
 )
