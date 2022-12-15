@@ -6,6 +6,8 @@ output:
     extra_dependencies: ["polski", "mathtools", "amsthm", "amssymb", "icomma", "upgreek", "xfrac", "scrextend", "float", "tabularx", "hyperref", "caption", "enumitem"]
 ---
 
+\renewcommand{\figurename}{Wykres}
+\renewcommand{\tablename}{Tablica}
 \raggedbottom
 
 ```{r setup, include=FALSE}
@@ -18,6 +20,8 @@ library(dplyr)
 library(zeallot)
 library(tidyr)
 library(knitr)
+
+data <- read.csv("data/data.csv")
 ```
 
 
@@ -32,9 +36,8 @@ library(knitr)
 # Braki w danych
 |      Zanim rozpoczniemy analizować nasze dane, sprawdźmy, czy zawierają one jakieś braki.
 
-```{r, echo=FALSE}
-knitr::opts_chunk$set(fig.width=6, fig.height=9) 
-data <- read.csv("data.csv")
+```{r}
+knitr::opts_chunk$set(fig.width=6, fig.height=9)
 
 nans <- data.frame()
 years <- sort(unique(data$year))
@@ -49,8 +52,12 @@ for (y in years) {
 }
 nans <- cbind(years, nans)
 names(nans) <- colnames(data[c(2, 4:22)])
-kable(t(nans))
+df <- data.frame(t(nans))
+names(df) <- lapply(df[1, ], as.character)
+df <- df[-1,1:16]
+kable(df)
 ```
+
 
 # Devoloped a developing
 |      Jak wspomnieliśmy wyżej, dane są podzielone na dwie kategorie. Jedna z nich o nazwie 'developed' reprezentuje państwa wysoko rozwinięte. Natomiast drugą kategorią jest 'developing' i stanowi państwa słabiej rozwinięte. Są w niej zawaarte głównie państwa afrykańskie. Jako że poszczególne dane pośród tych dwóch kategorii mogą się zasadniczo różnić, przeanalizujemy je z osobna.
@@ -62,8 +69,7 @@ kable(t(nans))
 |      Aby przeanalizować, co najbardziej wpływa na długość życia, musimy sprawdzić czy poszczególne zbiory danych są od siebie zależne, czy występuje między nimi pewna korelacja. W tym celu posłużymy się wykresami punktowymi i na ich podstawie wybierzemy odpowiednie narzędzia do badania korelacji.
 
 
-\begin{figure}[H]
-```{r, echo=FALSE, fig.align="center"}
+```{r wykresik, fig.cap="\\label{fig:wykresik} Wykressss", fig.align="center"}
 data[4:22] %>%
   gather(-life_expectancy, key = "var", value = "value") %>% 
   ggplot(aes(x = value, y = life_expectancy)) +
@@ -75,8 +81,6 @@ data[4:22] %>%
   plot.title = element_text(hjust = 0.5, size = 24),
 )
 ```
-\caption{Zależność długości życia od poszczególnych czynników}
-\end{figure}
 
 
 Od razu możemy zauważyć, że rozrzut punktów na poszczególnych wykresach jest bardzo zróżnicowany. Na jednych wydaje się on być całkowicie losowy, natomiast na innych widać pewną zależność. Ze względu na to zróżnicowanie, nie użyjemy do sprawdzenia korelacji współczynnika Pearsona - sprawdza on jedynie zależność liniową. Można za to wykorzystać współczynnik korelacji Spearmana, który sprawdza zależność monotoniczną między danymi. Ze względu na silną korelację, poddamy głębszej analizie dwa czynniki - długość edukacji, oraz produkt krajowy brutto.
@@ -94,17 +98,15 @@ Od razu możemy zauważyć, że rozrzut punktów na poszczególnych wykresach je
 \begin{figure}[H]
 ```{r, echo = FALSE, fig.width = 5, fig.height = 4, fig.align="center"}
 
-df <- read.csv('data.csv', header = TRUE, sep = ',')
-
 #średnia długość życia dla państw
-df2 <- df[df$year == 2015,]
-df2 <- arrange(df2, desc(life_expectancy))
+df <- data[data$year == 2015,]
+df <- arrange(df, desc(life_expectancy))
 
-bar2 <- ggplot(data = rbind(head(df2, 5), df2[df2$country == 'Poland',], tail(df2, 5)), mapping = aes(reorder(country, -life_expectancy, sum), life_expectancy)) + 
+bar2 <- ggplot(data = rbind(head(df, 5), df[df$country == 'Poland',], tail(df, 5)), mapping = aes(reorder(country, -life_expectancy, sum), life_expectancy)) + 
   geom_bar(stat = 'identity', fill = c('light green', 'light green', 'light green', 'light green', 'light green', 'gold', 'orangered', 'orangered', 'orangered', 'orangered', 'orangered'), color = 'black') +
   theme(axis.text.x = element_text(angle = 90), axis.title.x = element_blank()) +
   labs(y = 'Life expectancy') +
-  geom_hline(yintercept = mean(df2$life_expectancy), color = 'purple')
+  geom_hline(yintercept = mean(df$life_expectancy), color = 'purple')
 
 bar2
 ```
