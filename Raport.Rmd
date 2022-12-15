@@ -106,7 +106,7 @@ Na obu wykresach zauważyć można, że państwa lepiej rozwinięte wyróżniaj�
 
 
 # Analiza
-|      Aby przeanalizować, co najbardziej wpływa na długość życia, musimy sprawdzić czy poszczególne zbiory danych są od siebie zależne, czy występuje między nimi pewna korelacja. W tym celu posłużymy się wykresami punktowymi i na ich podstawie wybierzemy odpowiednie narzędzia do badania korelacji.
+|      Jednym z głównych celów raportu jest sprawdzenie, które czynniki mają największy wpływ na długość życia. Dobrym początkiem będzie narysowanie wykresów punktowych długości życia od poszczególnych zmiennych. Wykresy takie dają wgląd na to, jak zachowują się dane oraz pozwalają ocenić, czy występuje między nimi jakaś korelacja. Dodatkowo skorzystamy ze współczynnika korelacji Spearmana, ponieważ jest to miara monotonicznej zależności, a właśnie takiej zależności szukamy. Wspomnianą korelację obliczymy między długością życia, a pozostałymi zmiennymi liczbowymi dla każdego roku z osobna.
 
 
 ```{r scattery_le, fig.cap="\\label{fig:scattery_le} Scattery", fig.align="center"}
@@ -121,6 +121,25 @@ data[4:22] %>%
 )
 ```
 
+```{r}
+correlations <- data.frame()
+years <- sort(unique(data$year))
+for (y in years) {
+    data_year <- data %>% filter(year == y)
+    rs <- c()
+    for (column in colnames(data_year[5:22])) {
+        r <- cor(data_year$life_expectancy, data_year[column], use="pairwise.complete.obs", method="spearman")
+        rs <- append(rs, round(r, 2))
+    }
+    correlations <- rbind(correlations, rs)
+}
+correlations <- cbind(years, correlations)
+names(correlations) <- colnames(data[c(2, 5:22)])
+df <- data.frame(t(correlations), header=TRUE)
+names(df) <- lapply(df[1, ], as.character)
+df <- df[-1,1:16]
+df
+```
 
 Od razu możemy zauważyć, że rozrzut punktów na poszczególnych wykresach jest bardzo zróżnicowany. Na jednych wydaje się on być całkowicie losowy, natomiast na innych widać pewną zależność. Ze względu na to zróżnicowanie, nie użyjemy do sprawdzenia korelacji współczynnika Pearsona - sprawdza on jedynie zależność liniową. Można za to wykorzystać współczynnik korelacji Spearmana, który sprawdza zależność monotoniczną między danymi. Ze względu na silną korelację, poddamy głębszej analizie dwa czynniki - długość edukacji, oraz produkt krajowy brutto.
 
