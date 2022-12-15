@@ -21,6 +21,7 @@ library(zeallot)
 library(tidyr)
 library(knitr)
 library(reshape2)
+library(cowplot)
 
 data <- read.csv("data/data.csv")
 ```
@@ -59,11 +60,9 @@ kable(df)
 
 
 # Devoloped a developing
-|      Jak wspomnieliśmy wyżej, dane są podzielone na dwie kategorie. Jedna z nich o nazwie 'developed' reprezentuje państwa wysoko rozwinięte. Natomiast drugą kategorią jest 'developing' i stanowi państwa słabiej rozwinięte. Są w niej zawaarte głównie państwa afrykańskie. Jako że poszczególne dane pośród tych dwóch kategorii mogą się zasadniczo różnić, przeanalizujemy je z osobna.
+|      Spodziewamy się, że w krajach lepiej rozwiniętych długość życia jest większa niż w krajach uboższych. Żeby przekonać się, czy w rzeczywistości tak jest, porównamy średnie dla obu typów krajów dla każdego roku. Ponieważ państwa zawarte w danych znacznie różnią się populacją, nie możemy traktować ich na równi. Z tego powodu skorzystamy z średniej ważonej, gdzie wagami będą populacje.
 
-|      Spodziewamy się, że w krajach lepiej rozwiniętych długość życia jest większa niż w krajach uboższych. Żeby przekonać się, czy w rzeczywistości tak jest, 
-
-```{r le_developed_developing, fig.cap="\\label{fig:le_developed_developing} Porównanie średniej długości życia dla krajów wysoko i słabo rozwiniętych", fig.align="center", fig.width = 5, fig.height = 3}
+```{r le_dd, fig.cap="\\label{fig:le_dd} Porównanie średniej długości życia dla krajów wysoko i słabo rozwiniętych", fig.align="center", fig.width = 5, fig.height = 3}
 
 data_developed <- data %>% filter(status == 'Developed')
 data_developing <- data %>% filter(status == 'Developing')
@@ -90,6 +89,20 @@ ggplot() +
   geom_line(aes(x=years, y=le2, col='Developing')) + 
   scale_color_manual(values=c('#009000', 'red')) + xlab("Rok") + ylab("Średnia długość życia") + labs(col="")
 ```
+
+Jak możemy zauważyć na powyższym wykresie, krzywa dla państw rozwiniętych znajduje się znacznie wyżej niż dla państw rozwijających się. W obu przypadkach jednak dostrzec można w miarę podobny trend wzrostowy. Ponieważ w dalszej części pracy analizowane będą kolumny z danymi dotyczącymi nauczania oraz PKB, spójrzmy już teraz na wykresy punktowe tych wartości z zaznaczeniem, które wartości pochodzą od krajów rozwiniętych, a które od rozwijających się.
+
+```{r schooling_dd, fig.cap="\\label{fig:schooling_dd} Wykres punktowy długości życia od czasu nauczania", fig.align="center", fig.width = 5, fig.height = 3}
+plt1 <- ggplot() + geom_point(aes(data$schooling, data$life_expectancy, col=data$status), alpha=0.3, size=0.6) +
+scale_color_manual(values=c('#1cb900', '#ce0000')) + xlab("Lata nauki") + ylab("Długość życia") + theme(legend.position='none')
+
+plt2 <- ggplot() + geom_point(aes(data$GDP, data$life_expectancy, col=data$status), alpha=0.3, size=0.6) +
+scale_color_manual(values=c('#1cb900', '#ce0000')) + xlab("PKB") + ylab("Długość życia") + labs(col="")
+
+plot_grid(plt1, plt2)
+```
+
+Na obu wykresach zauważyć można, że państwa lepiej rozwinięte wyróżniają się długim czasem nauczania, wysokim PKB oraz długim czasem życia. W dalszej części analizy państwa te traktowane będą jako wzór do osiągnięcia długowieczności.
 
 
 # Analiza
