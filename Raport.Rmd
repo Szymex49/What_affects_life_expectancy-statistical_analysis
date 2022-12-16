@@ -44,9 +44,9 @@ data <- read.csv("data/data.csv")
 
 
 # Braki w danych
-|      Zanim rozpoczniemy analizować nasze dane, sprawdźmy, czy zawierają one jakieś braki.
+|      Zanim przejdziemy do analizy naszych danych, sprawdźmy, czy zawierają one jakieś braki. W tym celu zliczamy wszystkie brakujące wartości dla każdej zmiennej liczbowej w każdym roku.
 
-```{r, fig.width=6, fig.height=9}
+```{r tabela_na, fig.cap="\\label{fig:tabela_na} Liczba brakujących wartości dla każdej zmiennej liczbowej w każdym roku."}
 nans <- data.frame()
 years <- sort(unique(data$year))
 for (y in years) {
@@ -101,7 +101,7 @@ ggplot() +
   scale_color_manual(values=c('#009000', 'red')) + xlab("Rok") + ylab("Średnia długość życia") + labs(col="")
 ```
 
-Jak możemy zauważyć na powyższym wykresie, krzywa dla państw rozwiniętych znajduje się znacznie wyżej niż dla państw rozwijających się. W obu przypadkach jednak dostrzec można w miarę podobny trend wzrostowy. Ponieważ w dalszej części pracy analizowane będą kolumny z danymi dotyczącymi nauczania oraz PKB, spójrzmy już teraz na wykresy punktowe tych wartości z zaznaczeniem, które wartości pochodzą od krajów rozwiniętych, a które od rozwijających się.
+Jak możemy zauważyć na powyższym wykresie, krzywa dla państw rozwiniętych znajduje się znacznie wyżej niż dla państw rozwijających się. W obu przypadkach jednak dostrzec można w miarę podobny trend wzrostowy. Ponieważ w dalszej części pracy analizowane będą kolumny z danymi dotyczącymi nauczania oraz PKB, spójrzmy już teraz na wykresy punktowe tych wartości z zaznaczeniem, które wartości dotyczą krajów rozwiniętych, a które rozwijających się.
 
 ```{r schooling_dd, fig.cap="\\label{fig:schooling_dd} Wykres punktowy długości życia od czasu nauczania", fig.align="center", fig.width = 5, fig.height = 3}
 plt1 <- ggplot() + geom_point(aes(data$schooling, data$life_expectancy, col=data$status), alpha=0.3, size=0.6) +
@@ -122,7 +122,7 @@ Na obu wykresach zauważyć można, że państwa lepiej rozwinięte wyróżniaj�
 # Analiza
 |      Jednym z głównych celów raportu jest sprawdzenie, które czynniki mają największy wpływ na długość życia. Dobrym początkiem będzie narysowanie wykresów punktowych długości życia od poszczególnych zmiennych. Wykresy takie dają wgląd na to, jak zachowują się dane oraz pozwalają ocenić, czy występuje między nimi jakaś zależność. Dodatkowo skorzystamy ze współczynnika korelacji Spearmana, ponieważ jest to miara monotonicznej zależności, a właśnie takiej zależności szukamy. Wspomnianą korelację obliczymy między długością życia, a pozostałymi zmiennymi liczbowymi dla każdego roku z osobna.
 
-```{r scattery_le, fig.cap="\\label{fig:scattery_le} Scattery", fig.align="center", fig.width = 5, fig.height = 8}
+```{r scattery_le, fig.cap="\\label{fig:scattery_le} Wykresy punktowe oczekiwanej długości życia od poszczególnych zmiennych.", fig.align="center", fig.width = 5, fig.height = 8}
 data[4:22] %>%
   gather(-life_expectancy, key = "var", value = "value") %>% 
   ggplot(aes(x = value, y = life_expectancy)) +
@@ -134,7 +134,7 @@ data[4:22] %>%
 )
 ```
 
-```{r}
+```{r tabela_korelacji, fig.cap="\\label{fig:tabela_korelacji} Tabela korelacji Spearmana między oczekiwaną długością życia, a poszczególnymi zmiennymi dla każdego roku."}
 correlations <- data.frame()
 years <- sort(unique(data$year))
 for (y in years) {
