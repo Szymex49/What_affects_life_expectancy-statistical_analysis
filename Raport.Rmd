@@ -236,29 +236,22 @@ Niech $\alpha = 0,05$ będzie poziomem istotności naszego testu. Wyznaczona p-w
 
 
 # Polska
+|      Wyniki przeprowadzonych analiz wykorzystamy, by określić co pozwoliłoby Polsce wydłużyć średni czas życia. Zacznijmy od porównania Polski z resztą świata. Rozważymy dane z 2015 roku - najnowsze, którymi dysponujemy. Średnia długość życia na globie wyniosła wtedy 71,62 lata. Mianem najdłużej żyjących ludzi mogli się wtedy poszczycić Słoweńczycy z imponującą średnią życia aż 88 lat. Natomiast najkrócej żyjącymi ludźmi okazali się być obywatele Sierra Leony z wynikiem zaledwie 51 lat. Polacy osiągneli wynik 77.5 lat, co stawia nas na 42 miejscu w rankingu - wynik dobry, ale nie najlepszy.
 
-
-
-
-
-# Jak długo żyją inni?
-|      Jak już wspomnieliśmy - długość życia zależy od wielu czynników i dla każdego państwa na świecie inaczej się one charakteryzują. Rozważmy na początku dane z 2015 roku - najnowsze, którymi dysponujemy. Średnia długość życia na globie wyniosła wtedy 71,62 lata. Jednak rozrzut danych dla poszczególnych państw jest duży. Mianem najdłużej żyjących ludzi mogli się wtedy poszczycić Słoweńczycy z imponującą średnią życia aż 88 lat. Natomiast najkrócej żyjącymi ludźmi okazali się być obywatele Sierra Leony z wynikiem zaledwie 51 lat. Polacy osiągneli wynik 77.5 lat, co stawia nas na 42 miejscu w rankingu - wynik dobry, ale nie najlepszy.
-
-```{r barplot, fig.cap="\\label{fig:barplot} Polska a inne państwa", fig.width = 5, fig.height = 4, fig.align="center"}
+```{r barplot, fig.cap="\\label{fig:barplot} Porównanie oczekiwanej długości życia w Polsce z pięcioma najwyższymi wartościami oraz pięcioma najniższymi wartościami.", fig.width = 5, fig.height = 4, fig.align="center"}
 
 #średnia długość życia dla państw
 df <- data[data$year == 2015,]
 df <- arrange(df, desc(life_expectancy))
 
 bar2 <- ggplot(data = rbind(head(df, 5), df[df$country == 'Poland',], tail(df, 5)), mapping = aes(reorder(country, -life_expectancy, sum), life_expectancy)) + 
-  geom_bar(stat = 'identity', fill = c('light green', 'light green', 'light green', 'light green', 'light green', 'gold', 'orangered', 'orangered', 'orangered', 'orangered', 'orangered'), color = 'black') +
+  geom_bar(stat = 'identity', fill = c('light green', 'light green', 'light green', 'light green', 'light green', 'orangered', 'gold', 'gold', 'gold', 'gold', 'gold'), color = 'black') +
   theme(axis.text.x = element_text(angle = 90), axis.title.x = element_blank()) +
-  labs(y = 'Life expectancy') +
-  geom_hline(yintercept = mean(df$life_expectancy), color = 'purple')
+  labs(y = 'Długość życia') +
+  geom_hline(yintercept = mean(df$life_expectancy), color = 'blue', size=1)
 
 bar2
 ```
-
 
 
 
