@@ -27,12 +27,20 @@ data <- read.csv("data/data.csv")
 ```
 
 
+
+
 # Wstęp
 <!-- Akapit - 6 spacji -->
 |      W niniejszej pracy chcielibyśmy przeanalizować, jak poszczególne czynniki zewnętrzne wpływają na długość naszego życia. Jak się okazuje, jedne z nich są poważnym problemem, podczas gdy inne w niewielkim stopniu przyczyniają się na długość życia. Do analizy posłużymy się zbiorem danych charakteryzującym wiele państw świata pod kilkoma aspektami, między innymi takimi jak jakość edukacji, spożycie alkoholu, czy zapadalność na poszczególne choroby. Link do danych znajduje się [$\color{blue}{\text{tutaj}}$](https://www.kaggle.com/datasets/kumarajarshi/life-expectancy-who?fbclid=IwAR2HtwUPyioM4tHmuae7B2owTUB8q3XlmpP12LbTM9NYDsi4qtaWGOYoNDE).
 
 
+
+
+
 # Opis danych
+
+
+
 
 
 # Braki w danych
@@ -57,6 +65,9 @@ names(df) <- lapply(df[1, ], as.character)
 df <- df[-1,1:16]
 kable(df)
 ```
+
+
+
 
 
 # Devoloped a developing
@@ -105,6 +116,9 @@ plot_grid(plt1, plt2)
 Na obu wykresach zauważyć można, że państwa lepiej rozwinięte wyróżniają się długim czasem nauczania, wysokim PKB oraz długim czasem życia. W dalszej części analizy państwa te traktowane będą jako wzór do osiągnięcia długowieczności.
 
 
+
+
+
 # Analiza
 |      Jednym z głównych celów raportu jest sprawdzenie, które czynniki mają największy wpływ na długość życia. Dobrym początkiem będzie narysowanie wykresów punktowych długości życia od poszczególnych zmiennych. Wykresy takie dają wgląd na to, jak zachowują się dane oraz pozwalają ocenić, czy występuje między nimi jakaś zależność. Dodatkowo skorzystamy ze współczynnika korelacji Spearmana, ponieważ jest to miara monotonicznej zależności, a właśnie takiej zależności szukamy. Wspomnianą korelację obliczymy między długością życia, a pozostałymi zmiennymi liczbowymi dla każdego roku z osobna.
 
@@ -140,9 +154,11 @@ df <- df[-1,1:16]
 kable(df)
 ```
 
-Możemy zauważyć, że rozrzut punktów na poszczególnych wykresach jest bardzo zróżnicowany. Na jednych wydaje się on być całkowicie losowy, natomiast na innych widać pewną zależność. Z kolei z tabeli korelacji odczytać możemy, że najsilniejszą ujemną zależność z oczekiwanym czasem życia mają zmienne związane ze śmiertelnością oraz niedowaga. Natomiast pozytywną korelację przejawiają zmienne takie jak BMI, zasięg szczepień na błonicę oraz polio, PKB, a w szczególności średni czas nauczania i wskaźnik rozwoju społecznego. Korelacja tego ostatniego nie jest zaskoczeniem, ponieważ wskaźnik ten jest wyliczany m. in. z oczekiwanego czasu życia, a więc wartości te są naturalnie od siebie zależne.
+Możemy zauważyć, że rozrzut punktów na poszczególnych wykresach jest bardzo zróżnicowany. Na jednych wydaje się on być całkowicie losowy, natomiast na innych widać pewną zależność. Z tabeli korelacji odczytać możemy, że najsilniejszą ujemną zależność z oczekiwanym czasem życia mają zmienne związane ze śmiertelnością oraz niedowaga. Natomiast pozytywną korelację przejawiają zmienne takie jak BMI, zasięg szczepień na błonicę oraz polio, PKB, a w szczególności średni czas nauczania i wskaźnik rozwoju społecznego. Wysoka korelacja tego ostatniego nie jest zaskoczeniem, ponieważ wskaźnik ten jest wyliczany m. in. z oczekiwanego czasu życia, a więc wartości te naturalnie są od siebie zależne. Interesująca może być za to zależność pomiędzy czasem życia, a nauczaniem. Na wykresie punktowym zauważyć można między nimi liniową korelację. Z kolei, jeśli spojrzymy na wykres dotyczący PKB, na myśl przychodzi nam zależność logarytmiczna. Aby dokładniej zbadać te zależności, poddamy wspomniane zmienne głębszej analizie.
 
-\newpage
+
+
+
 
 ### Edukacja
 |      Jako pierwsze przeanalizujemy wpływ czasu edukacji na oczekiwaną długość życia. W tym przypadku rozważymy dane wyłącznie z 2015 roku. Na wykresie \ref{fig:scatter_schooling} można zauważyć liniową zależność danych, zatem do zbadania korelacji możemy użyć współczynnika korelacji Pearsona. Przyjmuje wartość $R \approx 0,752$, więc jest to mocna korelacja. Dzięki niej możemy również dopasować do danych prostą regresji korzystając z metody najmniejszych kwadratów.
@@ -209,10 +225,20 @@ test
 
 Niech $\alpha = 0,05$ będzie poziomem istotności naszego testu. Wyznaczona p-wartość wynosi $p = 0,2532$. Ponieważ jest ona większa od wartości $\alpha$ to nie mamy podstaw do odrzucenia hipotezy zerowej i na zadanym poziomie istotności możemy przyjąć, że dane pochodzą z rozkładu normalnego. 
 
+
+
+
+
 ### PKB
 
 
+
+
+
 # Polska
+
+
+
 
 
 # Jak długo żyją inni?
@@ -232,6 +258,9 @@ bar2 <- ggplot(data = rbind(head(df, 5), df[df$country == 'Poland',], tail(df, 5
 
 bar2
 ```
+
+
+
 
 
 # Podsumowanie
