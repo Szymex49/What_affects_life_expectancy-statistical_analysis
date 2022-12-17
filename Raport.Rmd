@@ -318,5 +318,7 @@ Przypomnijmy, że zmienne wpływające pozytywnie na długość życia to BMI, z
 
 Natomiast zmiennymi skorelowanymi ujemnie są zmienne związane ze śmiertelnością oraz niedowagą. W tabeli zobaczymy, że śmiertelność u dorosłych w Polsce jest bardzo niska, jednak śmiertelność w przypadku niemowląt i dzieci poniżej 5-tego roku życia stawia nasze państwo mnniej więcej po środku w stosunku do reszty świata. Z kolei watości statystyki $Z$ dla kolumn dotyczących niedowagi mieszczą się w okolicach 0.35, co także nie jest najlepszym wynikiem. Dobrą strategią byłoby zatem zapobieganie zgonów u małych dzieci w pierwszej kolejności, a następnie walka z niedowagą.
 
+Wartość statystyki $Z$ dla średniego czasu edukacji wynosi 0.91, co stawia Polskę bardzo wysoko. Nie jest to jednak argument za tym, by zaprzestać inwestowanie w nauczanie. Jak zostało pokazane wcześniej, edukacja ma duży wpływ na długość życia. W Polsce średni czas nauczania w 2014 roku wynosił 16.4 lat. Przypuśćmy, że czas ten zostałby wydłużony do 18 lat. Skorzystamy teraz z wcześniej wyznaczonej regresji liniowej dla zależności pomiędzy czasem nauki, a czasem życia, by wyznaczyć przedział ufności.
+
 
 # Podsumowanie
