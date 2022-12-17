@@ -24,6 +24,8 @@ library(reshape2)
 library(cowplot)
 
 data <- read.csv("data/data.csv")
+data2014 <- data %>% filter(year == 2014)
+data2015 <- data %>% filter(year == 2015)
 ```
 
 
@@ -294,7 +296,27 @@ bar2 <- ggplot(data = rbind(head(df, 5), df[df$country == 'Poland',], tail(df, 5
 bar2
 ```
 
+Zdefiniujmy statystykę $Z$ w następujący sposób
+$$ Z_X(x_0) = \frac{\#\left\{x \in X: x < x_0 \right\}}{\#X}. $$
+Mówi ona jaka część liczb ze zbioru $X$ jest poniżej wartości $x_0$. Wykorzystamy ją, by policzyć jaka część państw jest poniżej wartości każdej zmiennej dla Polski. Statystyki te wyliczymy dla roku 2014, ponieważ w roku 2015 występuje sporo braków danych.
 
+```{r polska_porownanie}
+pol <- data2014 %>% filter(country == "Poland")
+stats <- c()
+
+for (column in colnames(data)[4:22]) {
+    F <- ecdf(data2014[,column])
+    stats <- append(stats, round(F(pol[column]), 2))
+}
+
+df <- data.frame(colnames(data)[4:22], stats)
+colnames(df) <- c("Zmienna", "Wartość statystyki Z")
+kable(df)
+```
+
+Przypomnijmy, że zmienne wpływające pozytywnie na długość życia to BMI, zasięg szczepień na błonicę oraz polio, PKB, średni czas nauczania i wskaźnik rozwoju społecznego. Na powyższej tabeli zauważymy, że z wymienionych zmiennych najniższą wartość ma statystyka obliczona dla szczepień na polio i wynosi ona 0.55, co stawia nasz kraj lekko powyżej połowy. Stąd, aby zwiększyć długość życia Polaków, państwo mogłoby zwiększyć zasięg szczepień na wspomnianą chorobę.
+
+Natomiast zmiennymi skorelowanymi ujemnie są zmienne związane ze śmiertelnością oraz niedowagą. W tabeli zobaczymy, że śmiertelność u dorosłych w Polsce jest bardzo niska, jednak śmiertelność w przypadku niemowląt i dzieci poniżej 5-tego roku życia stawia nasze państwo mnniej więcej po środku w stosunku do reszty świata. Z kolei watości statystyki $Z$ dla kolumn dotyczących niedowagi mieszczą się w okolicach 0.35, co także nie jest najlepszym wynikiem. Dobrą strategią byłoby zatem zapobieganie zgonów u małych dzieci w pierwszej kolejności, a następnie walka z niedowagą.
 
 
 # Podsumowanie
