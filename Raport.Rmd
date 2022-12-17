@@ -103,10 +103,12 @@ ggplot() +
 
 Jak możemy zauważyć na powyższym wykresie, krzywa dla państw rozwiniętych znajduje się znacznie wyżej niż dla państw rozwijających się. W obu przypadkach jednak dostrzec można w miarę podobny trend wzrostowy. Ponieważ w dalszej części pracy analizowane będą kolumny z danymi dotyczącymi nauczania oraz PKB, spójrzmy już teraz na wykresy punktowe tych wartości z zaznaczeniem, które wartości dotyczą krajów rozwiniętych, a które rozwijających się.
 
-```{r schooling_dd, fig.cap="\\label{fig:schooling_dd} Wykres punktowy długości życia od czasu nauczania", fig.align="center", fig.width = 5, fig.height = 3}
+```{r fig.width = 12, fig.height = 4}
 plt1 <- ggplot() + geom_point(aes(data$schooling, data$life_expectancy, col=data$status), alpha=0.3, size=0.6) +
 scale_color_manual(values=c('#1cb900', '#ce0000')) + xlab("Lata nauki") + ylab("Długość życia") + theme(legend.position='none')
 
+```
+```{r schooling_dd, fig.cap="\\label{fig:schooling_dd} Wykres punktowy długości życia od czasu nauczania", fig.width = 12, fig.height = 4} 
 plt2 <- ggplot() + geom_point(aes(data$GDP, data$life_expectancy, col=data$status), alpha=0.3, size=0.6) +
 scale_color_manual(values=c('#1cb900', '#ce0000')) + xlab("PKB") + ylab("Długość życia") + labs(col="")
 
