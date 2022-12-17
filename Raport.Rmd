@@ -40,8 +40,54 @@ data2015 <- data %>% filter(year == 2015)
 
 
 # Opis danych
+|      Przed rozpoczęciem głównej analizy omówimy krótko, o czym nam mówi każda kolumna w tabeli danych.
+\begin{itemize}
 
+\item A country - kolumna ta zawiera nazwy państw, które zostały uwzględnione w zbiorze danych. W sumie są to 193 różne państwa.
 
+\item Year - kolumna z latami. Zebrane dane pochodzą z lat 2000-2015.
+
+\item A status - odnosi się do stopnia rozwoju państw. Jest podzielona na dwie zasadnicze kategorie: developing, czyli państwa wciąż rozwijające się (stanowią 83% wszystkich wartości), oraz developed, czyli te już rozwinięte (pozostałe 17%).
+
+\item Life expectancy - czyli oczekiwana długość życia. Podana jest w latach.
+
+\item Adult mortality - mówi nam o śmiertelności wśród osób dorosłych. Podane wartości oznaczają liczbę zgonów osób między 15, a 60 rokiem życia przypadającą na 1000 osób.
+
+\item Infant deaths - oznacza śmiertelność wśród niemowląt/dzieci. Również podana w liczbie śmierci przypadającej na 1000 osób.
+
+\item Alcohol - przeciętna konsumpcja alkoholu u osób powyżej 15 roku życia w ciągu roku. Podana jako liczba czystego alkoholu w litrach.
+
+\item Percentage expenditure - wydatki na zdrowie jako procent PKB per capita.
+
+\item Hepatitis B - odporność na zapalenie wątroby typu B wśród 1-latków podana w procentach.
+
+\item Measles (?) - liczba zanotowanych przypadków Odry na 1000 osób. 
+
+\item BMI - przeciętny indeks BMI całej populacji danego kraju.
+
+\item Under-five deaths - liczba zgonów osób w wieku poniżej 5 lat na 1000 osób.
+
+\item Polio - odporność na polio wśród 1-latków podana w procentach.
+
+\item Total expenditure - wydatki rządu na zdrowie jako procent wszystkich wydatków.
+
+\item Diphtheria - odporność na błonicę wśród 1-latków podana w procentach.
+
+\item HIV/AIDS - ilość zgonów na HIV/AIDS wśród niemowlaków (0-4 lata) na 1000 osób.
+
+\item GDP - produkt krajowy brutto (PKB) podany w dolarach.
+
+\item Population - populacja danego kraju.
+
+\item Thinness 1-19 years - proporcja osób chudych wśród osób w wieku 10-19 lat. Wyrażona w procentach.
+
+\item Thinness 5-9 years - proporcja osób chudych wśród osób w wieku 5-9 lat. Wyrażona w procentach.
+
+\item Income composition (?) - współczynnik rozwoju populacji danego kraju w kategorii dochodu ze źródeł. Podany jako liczba od 0 do 1.
+
+\item Schooling - liczba lat edukacji podana w latach.
+
+\end{itemize}
 
 
 
