@@ -218,7 +218,7 @@ Kształt histogramu jest zbliżony do krzywej gaussowskiej. Sprawdźmy czy rozk�
 \item $\mathcal{H}_1$: wartości residuów nie są z rozkładu normalnego
 \end{itemize}
 
-```{r, echo = FALSE, eval = FALSE}
+```{r, echo = FALSE, eval = TRUE}
 test <- ks.test(e, 'pnorm', mean(e), sd(e))
 test
 ```
@@ -258,6 +258,21 @@ xs2 <- seq(0.1, max(df2$GDP), 10)
 reg2_final <- ggplot() + geom_point(aes(df2$GDP, df2$life_expectancy), alpha = 0.5) + geom_line(aes(xs2, a2*log(xs2) + b2), col='red', linewidth=1)
 plot_grid(reg2, reg2_final)
 ```
+Następnie zbadamy czy residua mają jakiś rozkład. Pomoże nam w tym histogram.
+
+```{r hist_gdp, fig.cap="\\label{fig:hist_gdp} Histogram residuów", fig.align="center", fig.width = 4, fig.height = 3}
+e <- df2$life_expectancy - a2*log(df2$GDP) - b2
+hist_e <- ggplot(data.frame(e = e), aes(e)) + geom_histogram(aes(y = after_stat(density)), fill = 'white', color = 'black')
+hist_e
+```
+
+Średnia residuów $\mu_e = 0$ natomiast odchylenie standardowe $\sigma_e \approx 7,07$. Z kształtu histogramu można przypuszczać, że wartości residuów pochodzą z rozkładu normalnego. Aby zweryfikować tą hipotezę, ponownie posłużymy się testem Kołmogorowa-Smirnova na poziomie istotności $\alpha = 0,05$.
+
+```{r, echo = FALSE, eval = TRUE}
+test <- ks.test(e, 'pnorm', mean(e), sd(e))
+test
+```
+Jak pokazuje wynik p-wartość $p = 0,9126$ jest znacznie większa od poziomu istotności $\alpha$. Nie mamy zatem podstaw do odrzucenia hipotezy o braku normalności tego rozkładu. Możemy zatem przyjąć, że rozkład residuów jest rozkładem normalnym $\mathcal{N}(\mu_e, \sigma_e) = \mathcal{N}(0, 7,07)$.
 
 # Polska
 |      Wyniki przeprowadzonych analiz wykorzystamy, by określić co pozwoliłoby Polsce wydłużyć średni czas życia. Zacznijmy od porównania Polski z resztą świata. Rozważymy dane z 2015 roku - najnowsze, którymi dysponujemy. Średnia długość życia na globie wyniosła wtedy 71,62 lata. Mianem najdłużej żyjących ludzi mogli się wtedy poszczycić Słoweńczycy z imponującą średnią życia aż 88 lat. Natomiast najkrócej żyjącymi ludźmi okazali się być obywatele Sierra Leony z wynikiem zaledwie 51 lat. Polacy osiągneli wynik 77.5 lat, co stawia nas na 42 miejscu w rankingu - wynik dobry, ale nie najlepszy.
