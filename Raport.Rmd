@@ -231,31 +231,32 @@ Niech $\alpha = 0,05$ będzie poziomem istotności naszego testu. Wyznaczona p-w
 
 ### PKB
 
-Podobnie jak w przypadku długości edukacji, będziemy analizować dane dotyczące PKB wyłącznie z 2015 roku. Wykres prezentuje się następująco
+Podobnie jak w przypadku długości edukacji, będziemy analizować dane dotyczące PKB wyłącznie z 2015 roku. W przeciwieństwie do poprzedniego przypadku, dane te nie mają zależności liniowej, a kształtem przypomina bardziej logarytmiczną. W tym celu, zrobimy transformację danych do postaci liniowej, żeby móc później skorzystać z metody najmniejszych kwadratów. Innymi słowy $\tilde{x} = \log(x)$
 
 ```{r scatter_gdp, fig.cap="\\label{fig:scatter_gdp} Zależność długości życia od PKB w 2015 roku", fig.align="center", fig.width = 6, fig.height = 2}
 df2 <- data[(!is.na(data$GDP)) & (!is.na(data$life_expectancy)) & (data$year == 2015),]
 scat2 <- ggplot(data = df2, mapping = aes(x = GDP, y = life_expectancy)) + geom_point()
 ```
-W przeciwieństwie do poprzedniego przypadku, dane te nie mają zależności liniowej, a kształtem przypomina bardziej logarytmiczną. W tym celu, zrobimy transformację danych do postaci liniowej, żeby móc później skorzystać z metody najmniejszych kwadratów. Innymi słowy $\tilde{x} = \log(x)$
+
 
 ```{r scatter_gdp_line, fig.cap="\\label{fig:scatter_gdp_line} Transformacja danych do postaci liniowej", fig.align="center", fig.width = 6, fig.height = 2}
 scat2_mod <- ggplot(data = df2, mapping = aes(x = log(GDP), y = life_expectancy)) + geom_point()
 plot_grid(scat2, scat2_mod)
 ```
-Następnie dopasowujemy prostą regresji z MNK:
+\newpage
+Następnie dopasowujemy prostą regresji z MNK. Ostatecznie wykonujemy transformację odwrotną dla danych, wraz z wyznaczoną prostą, co w rezultacie da krzywą logarytmiczną dopasowaną do danych.
 
-```{r reg_gdp, fig.cap="\\label{fig:reg_gdp} Prosta regresji dla przetransformowanych danych", fig.align="center", fig.width = 3, fig.height = 2}
-reg2 <- regression(log(df2$GDP), df2$life_expectancy)
-reg2
+```{r reg_gdp, fig.cap="\\label{fig:reg_gdp} Prosta regresji dla przetransformowanych danych", fig.align="center", fig.width = 6, fig.height = 2}
+c(a1, b1) %<-% regression(log(df2$GDP), df2$life_expectancy, FALSE)
+xs1 <- seq(min(log(df2$GDP)), max(log(df2$GDP)), 0.1)
+reg2 <- ggplot() + geom_point(aes(log(df2$GDP), df2$life_expectancy), alpha = 0.5) + geom_line(aes(xs1, a1*xs1 + b1), col='red', linewidth=1)
 ```
-Ostatecznie wykonujemy transformację odwrotną dla prostej regresji co w rezultacie da krzywą logarytmiczną dopasowaną do danych.
 
-```{r reg_gdp_final, fig.cap="\\label{fig:reg_gdp_final} Regresja logarytmiczna orginalnych danych", fig.align="center", fig.width = 3, fig.height = 2}
-c(a, b) %<-% regression(log(df2$GDP), df2$life_expectancy, FALSE)
-xs <- seq(0.1, max(df2$GDP), 10)
-reg2_final <- ggplot() + geom_point(aes(df2$GDP, df2$life_expectancy), alpha = 0.5) + geom_line(aes(xs, a*log(xs) + b), col='red', linewidth=1)
-reg2_final
+```{r reg_gdp_final, fig.cap="\\label{fig:reg_gdp_final} Regresja logarytmiczna orginalnych danych", fig.align="center", fig.width =6, fig.height = 2}
+c(a2, b2) %<-% regression(log(df2$GDP), df2$life_expectancy, FALSE)
+xs2 <- seq(0.1, max(df2$GDP), 10)
+reg2_final <- ggplot() + geom_point(aes(df2$GDP, df2$life_expectancy), alpha = 0.5) + geom_line(aes(xs2, a2*log(xs2) + b2), col='red', linewidth=1)
+plot_grid(reg2, reg2_final)
 ```
 
 # Polska
