@@ -209,7 +209,7 @@ Możemy zauważyć, że rozrzut punktów na poszczególnych wykresach jest bardz
 
 
 
-
+\newpage
 
 ### Edukacja
 |      Jako pierwsze przeanalizujemy wpływ czasu edukacji na oczekiwaną długość życia. W tym przypadku rozważymy dane wyłącznie z 2015 roku. Na wykresie \ref{fig:scatter_schooling} można zauważyć liniową zależność danych, zatem do zbadania korelacji możemy użyć współczynnika korelacji Pearsona. Przyjmuje wartość $R \approx 0,752$, więc jest to mocna korelacja. Dzięki niej możemy również dopasować do danych prostą regresji korzystając z metody najmniejszych kwadratów.
