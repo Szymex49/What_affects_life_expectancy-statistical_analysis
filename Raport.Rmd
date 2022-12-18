@@ -409,7 +409,9 @@ Natomiast zmiennymi skorelowanymi ujemnie są zmienne związane ze śmiertelnoś
 Wartość statystyki $Z$ dla średniego czasu edukacji wynosi 0.91, co stawia Polskę bardzo wysoko. Nie jest to jednak argument za tym, by zaprzestać inwestowanie w nauczanie. Jak zostało pokazane wcześniej, edukacja ma duży wpływ na długość życia. W Polsce średni czas nauczania w 2014 roku wynosił 16.4 lat. Przypuśćmy, że czas ten zostałby wydłużony do 18 lat. Skorzystamy teraz z wcześniej wyznaczonej regresji liniowej dla zależności pomiędzy czasem nauki, a czasem życia, by wyznaczyć przedział ufności.
 
 
-
-
-
 # Podsumowanie
+|      Zestawienie danych, które postanowiliśmy przeanalizować okazało się być bardzo różnorodne, a do rozpatrzenia było wiele czynników. Jak się jednak okazało, nie wszystkie okazały się być aż tak istotne. Określiliśmy to na podstawie wykresów zależności między oczekiwaną długością życia, a poszczególnymi składowymi (wykres \ref{fig:scattery_le}). Na jednych wykresach była widoczna pewna zależność w danych, za to na innych dane były mocno rozproszone. Potwierdziliśmy nasze przypuszczenia dotyczące zależności wyliczając odpowiednie współczynniki korelacji. Jednym z najbardziej skorelowanych czynników z oczekiwaną długością życia okazał się być średni czas edukacji. Występuje tam zależność liniowa, a wraz ze wzrostem czasu poświęconego na naukę, wzrasta też średnia długość życia.
+
+|      Następnie porównaliśmy średnią długość życia Polski z pozostałymi krajami. W 2015 roku osiągneliśmy wynik 77,5 lat - większy od średniej o niemal 6 lat i całościowo jest to 42 najwyższy wynik (wykres \ref{fig:barplot}). Trochę nam jednak brakuje do liderów rankingu jakim są Słoweńcy z imponującym wynikiem 88 lat. Przeanalizowaliśmy jakie rezultaty w poszczególnych kategoriach osiąga Polska na tle reszty państw i na tej podstawie pokazaliśmy co można byłoby zrobić, aby poprawić średni czas życia Polaków.
+
+|      Okazało się, że statystyki związane ze śmiertelnością u dzieci, oraz niedowagą są w Polsce bardzo niekorzystne. Rozwiązaniem, które mogłoby poprawić nasz wynik byłaby więc walka z niedowagą, oraz zredukowanie śmiertelności u dzieci. Są też takie charakterystyki, gdzie osiągamy naprawdę dobre rezultaty, jak chociażby w długości edukacji. Nie jest to jednak powód do tego, aby rezygnować z inwestowania w oświatę, ponieważ została pokazana ścisła zależność między oczekiwaną długością życia a szkolnictwem. Stąd inwestowanie w naukę jest również niezwykle istotne, jeżeli chcemy żyć dłużej.
