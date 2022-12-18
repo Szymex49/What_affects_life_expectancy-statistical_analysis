@@ -212,14 +212,13 @@ Możemy zauważyć, że rozrzut punktów na poszczególnych wykresach jest bardz
 \newpage
 
 ### Edukacja
-|      Jako pierwsze przeanalizujemy wpływ czasu edukacji na oczekiwaną długość życia. W tym przypadku rozważymy dane wyłącznie z 2015 roku. Na wykresie \ref{fig:scatter_schooling} można zauważyć liniową zależność danych, zatem do zbadania korelacji możemy użyć współczynnika korelacji Pearsona. Przyjmuje wartość $R \approx 0,752$, więc jest to mocna korelacja. Dzięki niej możemy również dopasować do danych prostą regresji korzystając z metody najmniejszych kwadratów.
-Polega ona na znalezieniu takich współczynników $a, b$ dla których funkcja
+|      Jako pierwszy przeanalizujemy wpływ czasu edukacji na oczekiwaną długość życia. W tym przypadku rozważymy dane wyłącznie z 2015 roku, czyli te najbardziej aktualne. Na wykresie \ref{fig:scatter_schooling} można zauważyć liniową zależność danych, zatem do zbadania korelacji możemy użyć współczynnika Pearsona. Przyjmuje on wartość $R \approx 0,752$, więc jest to dość mocna korelacja. Dopasujemy teraz do danych prostą regresji korzystając z metody najmniejszych kwadratów. Metoda ta polega na znalezieniu takich współczynników $a, b$ dla których funkcja
 $$S(a,b) = \sum_{i = 1}^n (y_i - ax_i - b)^2$$
-przyjmuje wartość najmniejszą. Rozwiązaniem jest para współczynników
+przyjmuje wartość najmniejszą. Rozwiązaniem jest para estymatorów
 $$
     \begin{cases}
-      a = R\frac{S_y}{S_x} \\
-      b = \bar{y} - a\bar{x}
+      \hat{a} = R\frac{S_y}{S_x} \\
+      \hat{b} = \bar{y} - a\bar{x}
     \end{cases}
 $$
 gdzie $R$ jest współczynnikiem korelacji Pearsona, a $S_x, S_y$ są próbkowymi odchyleniami standardowymi.
@@ -251,7 +250,9 @@ regression(df$schooling, df$life_expectancy)
 ```
 
 \newpage
-|      Kolejnym punktem będzie analiza residuów. Sprawdźmy na histogramie jak wygląda rozkład wartości błędów.
+|      Kolejnym punktem będzie analiza residuów (błędów)
+$$e_i = y_i - \hat{y}_i\;,$$
+gdzie $\hat{y}_i = \hat{a}x_i + \hat{b}$. W celu zbadania rozkładu residuów, spójrzmy na ich histogram
 
 ```{r hist_schooling, fig.cap="\\label{fig:hist_schooling} Histogram residuów", fig.align="center", fig.width = 4, fig.height = 3}
 ab <- regression(df$schooling, df$life_expectancy, display_plot = FALSE)
@@ -262,22 +263,19 @@ hist_e <- ggplot(data.frame(e = e), aes(e)) + geom_histogram(aes(y = after_stat(
 hist_e
 ```
 
-Kształt histogramu jest zbliżony do krzywej gaussowskiej. Sprawdźmy czy rozkład residuów jest z rozkładu normalnego. W tym celu posłużymy się testem Kołmogorowa-Smirnova. Przedstawmy hipotezy:
+Kształt histogramu jest zbliżony do krzywej gaussowskiej. Średnia wartość residuów wynosi $\mu_e = 0$, a ich wariancja $\sigma_e^2 = 20,81$. Posłużymy się testem Kołmogorowa-Smirnova w celu zbadania normalności rozkładu błędów. Przedstawmy hipotezy:
 
 \begin{itemize}
-\item $\mathcal{H}_0$: wartości residuów są z rozkładu normalnego
-\item $\mathcal{H}_1$: wartości residuów nie są z rozkładu normalnego
+\item $\mathcal{H}_0$: wartości residuów są z rozkładu normalnego $\mathcal{N}(0, 20.81)$
+\item $\mathcal{H}_1$: wartości residuów nie są z rozkładu normalnego $\mathcal{N}(0, 20.81)$
 \end{itemize}
 
-```{r, echo = FALSE, eval = TRUE}
+```{r, echo = FALSE, eval = FALSE}
 test <- ks.test(e, 'pnorm', mean(e), sd(e))
 test
 ```
 
-Niech $\alpha = 0,05$ będzie poziomem istotności naszego testu. Wyznaczona p-wartość wynosi $p = 0,2532$. Ponieważ jest ona większa od wartości $\alpha$ to nie mamy podstaw do odrzucenia hipotezy zerowej i na zadanym poziomie istotności możemy przyjąć, że dane pochodzą z rozkładu normalnego. 
-
-
-
+Niech $\alpha = 0,05$ będzie poziomem istotności naszego testu. Wyznaczona p-wartość wynosi $p = 0,2532$. Ponieważ otrzymany wynik jest wystarczająco duży, to nie mamy podstaw do odrzucenia hipotezy zerowej i na zadanym poziomie istotności możemy przyjąć, że dane pochodzą z rozkładu normalnego $\mathcal{N}(0, 20.81)$. 
 
 
 ### PKB
@@ -319,7 +317,7 @@ hist_e
 
 Średnia residuów $\mu_e = 0$ natomiast odchylenie standardowe $\sigma_e \approx 7,07$. Z kształtu histogramu można przypuszczać, że wartości residuów pochodzą z rozkładu normalnego. Aby zweryfikować tą hipotezę, ponownie posłużymy się testem Kołmogorowa-Smirnova na poziomie istotności $\alpha = 0,05$.
 
-```{r, echo = FALSE, eval = TRUE}
+```{r, echo = FALSE, eval = FALSE}
 test <- ks.test(e, 'pnorm', mean(e), sd(e))
 test
 ```
