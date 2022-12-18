@@ -47,7 +47,7 @@ data2015 <- data %>% filter(year == 2015)
 
 \item Year - kolumna z latami. Zebrane dane pochodzą z lat 2000-2015.
 
-\item A status - odnosi się do stopnia rozwoju państw. Jest podzielona na dwie zasadnicze kategorie: developing, czyli państwa wciąż rozwijające się (stanowią 83% wszystkich wartości), oraz developed, czyli te już rozwinięte (pozostałe 17%).
+\item A status - odnosi się do stopnia rozwoju państw. Jest podzielona na dwie zasadnicze kategorie: developing, czyli państwa wciąż rozwijające się (stanowią 83\% wszystkich wartości), oraz developed, czyli te już rozwinięte (pozostałe 17\%).
 
 \item Life expectancy - czyli oczekiwana długość życia. Podana jest w latach.
 
@@ -85,7 +85,7 @@ data2015 <- data %>% filter(year == 2015)
 
 \item Income composition (?) - współczynnik rozwoju populacji danego kraju w kategorii dochodu ze źródeł. Podany jako liczba od 0 do 1.
 
-\item Schooling - liczba lat edukacji podana w latach.
+\item Schooling - czas trwania edukacji podany w latach.
 
 \end{itemize}
 
@@ -324,6 +324,8 @@ test
 ```
 Jak pokazuje wynik p-wartość $p = 0,9126$ jest znacznie większa od poziomu istotności $\alpha$. Nie mamy zatem podstaw do odrzucenia hipotezy o braku normalności tego rozkładu. Możemy zatem przyjąć, że rozkład residuów jest rozkładem normalnym $\mathcal{N}(\mu_e, \sigma_e) = \mathcal{N}(0, 7,07)$.
 
+\newpage
+
 # Polska
 |      Wyniki przeprowadzonych analiz wykorzystamy, by określić co pozwoliłoby Polsce wydłużyć średni czas życia. Zacznijmy od porównania Polski z resztą świata. Rozważymy dane z 2015 roku - najnowsze, którymi dysponujemy. Średnia długość życia na globie wyniosła wtedy 71,62 lata. Mianem najdłużej żyjących ludzi mogli się wtedy poszczycić Słoweńczycy z imponującą średnią życia aż 88 lat. Natomiast najkrócej żyjącymi ludźmi okazali się być obywatele Sierra Leony z wynikiem zaledwie 51 lat. Polacy osiągneli wynik 77.5 lat, co stawia nas na 42 miejscu w rankingu - wynik dobry, ale nie najlepszy.
 
@@ -341,11 +343,11 @@ bar2 <- ggplot(data = rbind(head(df, 5), df[df$country == 'Poland',], tail(df, 5
 
 bar2
 ```
-
+\newpage
 Zdefiniujmy statystykę $Z$ w następujący sposób
 $$ Z_X(x_0) = \frac{\#\left\{x \in X: x < x_0 \right\}}{\#X}. $$
 Mówi ona jaka część liczb ze zbioru $X$ jest poniżej wartości $x_0$. Wykorzystamy ją, by policzyć jaka część państw jest poniżej wartości każdej zmiennej dla Polski. Statystyki te wyliczymy dla roku 2014, ponieważ w roku 2015 występuje sporo braków danych.
-
+\newpage
 ```{r polska_porownanie}
 pol <- data2014 %>% filter(country == "Poland")
 stats <- c()
@@ -362,7 +364,7 @@ kable(df)
 
 Przypomnijmy, że zmienne wpływające pozytywnie na długość życia to BMI, zasięg szczepień na błonicę oraz polio, PKB, średni czas nauczania i wskaźnik rozwoju społecznego. Na powyższej tabeli zauważymy, że z wymienionych zmiennych najniższą wartość ma statystyka obliczona dla szczepień na polio i wynosi ona 0.55, co stawia nasz kraj lekko powyżej połowy. Stąd, aby zwiększyć długość życia Polaków, państwo mogłoby zwiększyć zasięg szczepień na wspomnianą chorobę.
 
-Natomiast zmiennymi skorelowanymi ujemnie są zmienne związane ze śmiertelnością oraz niedowagą. W tabeli zobaczymy, że śmiertelność u dorosłych w Polsce jest bardzo niska, jednak śmiertelność w przypadku niemowląt i dzieci poniżej 5-tego roku życia stawia nasze państwo mnniej więcej po środku w stosunku do reszty świata. Z kolei watości statystyki $Z$ dla kolumn dotyczących niedowagi mieszczą się w okolicach 0.35, co także nie jest najlepszym wynikiem. Dobrą strategią byłoby zatem zapobieganie zgonów u małych dzieci w pierwszej kolejności, a następnie walka z niedowagą.
+Natomiast zmiennymi skorelowanymi ujemnie są zmienne związane ze śmiertelnością oraz niedowagą. W tabeli zobaczymy, że śmiertelność u dorosłych w Polsce jest bardzo niska, jednak śmiertelność w przypadku niemowląt i dzieci poniżej 5-tego roku życia stawia nasze państwo mniej więcej po środku w stosunku do reszty świata. Z kolei watości statystyki $Z$ dla kolumn dotyczących niedowagi mieszczą się w okolicach 0.35, co także nie jest najlepszym wynikiem. Dobrą strategią byłoby zatem zapobieganie zgonów u małych dzieci w pierwszej kolejności, a następnie walka z niedowagą.
 
 Wartość statystyki $Z$ dla średniego czasu edukacji wynosi 0.91, co stawia Polskę bardzo wysoko. Nie jest to jednak argument za tym, by zaprzestać inwestowanie w nauczanie. Jak zostało pokazane wcześniej, edukacja ma duży wpływ na długość życia. W Polsce średni czas nauczania w 2014 roku wynosił 16.4 lat. Przypuśćmy, że czas ten zostałby wydłużony do 18 lat. Skorzystamy teraz z wcześniej wyznaczonej regresji liniowej dla zależności pomiędzy czasem nauki, a czasem życia, by wyznaczyć przedział ufności.
 
