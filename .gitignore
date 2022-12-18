@@ -1,5 +1,6 @@
 .vscode
 .Rhistory
+.ipynb_checkpoints
 *.aux
 *.out
 *.pdf
