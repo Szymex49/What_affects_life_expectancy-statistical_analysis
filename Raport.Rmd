@@ -4,6 +4,7 @@ author: "Szymon Malec, Michał Wiktorowski"
 output:
   pdf_document: 
     extra_dependencies: ["polski", "mathtools", "amsthm", "amssymb", "icomma", "upgreek", "xfrac", "scrextend", "float", "tabularx", "hyperref", "caption", "enumitem"]
+fontsize: 12pt
 ---
 
 \renewcommand{\figurename}{Wykres}
@@ -119,6 +120,7 @@ przeciw błonicy i krztuścowi wśród 1-latków podana w procentach.
 # 3. Brakujące dane
 |      Zanim przejdziemy do analizy naszych danych, sprawdźmy, czy zawierają one jakieś braki. W tym celu zliczamy wszystkie brakujące wartości dla każdej zmiennej liczbowej w każdym roku.
 
+\KOMAoptions{fontsize=10pt}
 \begin{table}[H]
     \centering
     \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
@@ -146,7 +148,7 @@ przeciw błonicy i krztuścowi wśród 1-latków podana w procentach.
     \end{tabular}
     \caption{Liczba brakujących wartości dla każdej kolumny i dla każdego roku.}
 \end{table}
-
+\KOMAoptions{fontsize=12pt}
 
 
 
@@ -219,6 +221,7 @@ data[4:22] %>%
     )
 ```
 
+\KOMAoptions{fontsize=5pt}
 \begin{table}[H]
     \centering
     \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
@@ -245,6 +248,7 @@ data[4:22] %>%
     \end{tabular}
     \caption{Tabela korelacji Spearmana między oczekiwaną długością życia, a poszczególnymi zmiennymi dla każdego roku.}
 \end{table}
+\KOMAoptions{fontsize=12pt}
 
 Możemy zauważyć, że rozrzut punktów na poszczególnych wykresach jest bardzo zróżnicowany. Na jednych wydaje się on być całkowicie losowy, natomiast na innych widać pewną zależność. Z tabeli korelacji odczytać możemy, że najsilniejszą ujemną zależność z oczekiwanym czasem życia mają zmienne związane ze śmiertelnością oraz niedowaga. Natomiast pozytywną korelację przejawiają zmienne takie jak BMI, zasięg szczepień na błonicę oraz polio, PKB, a w szczególności średni czas nauczania i wskaźnik rozwoju społecznego. Wysoka korelacja tego ostatniego nie jest zaskoczeniem, ponieważ wskaźnik ten jest wyliczany m. in. z oczekiwanego czasu życia, a więc wartości te naturalnie są od siebie zależne. Interesująca może być za to zależność pomiędzy czasem życia, a nauczaniem. Na wykresie punktowym zauważyć można między nimi liniową korelację. Z kolei, jeśli spojrzymy na wykres dotyczący PKB, na myśl przychodzi nam zależność logarytmiczna. Aby dokładniej zbadać te zależności, poddamy wspomniane zmienne głębszej analizie.
 
@@ -351,7 +355,7 @@ Jak możemy zobaczyć, krzywa logarytmiczna w miarę pokrywa się z danymi, wię
 
 
 
-# Możliwości dla Polski
+# 8. Możliwości dla Polski
 |      Wyniki przeprowadzonych analiz wykorzystamy, by określić co pozwoliłoby Polsce wydłużyć średni czas życia. Zacznijmy od porównania Polski z resztą świata. Rozważymy dane z 2015 roku - najnowsze, którymi dysponujemy. Średnia długość życia na globie wyniosła wtedy 71,62 lata. Mianem najdłużej żyjących ludzi mogli się wtedy poszczycić Słoweńczycy z imponującą średnią życia aż 88 lat. Natomiast najkrócej żyjącymi ludźmi okazali się być obywatele Sierra Leony z wynikiem zaledwie 51 lat. Polacy osiągneli wynik 77.5 lat, co stawia nas na 42 miejscu w rankingu - wynik dobry, ale nie najlepszy.
 
 ```{r barplot, fig.cap="\\label{fig:barplot} Porównanie oczekiwanej długości życia w Polsce z pięcioma najwyższymi wartościami oraz pięcioma najniższymi wartościami.", fig.width = 5, fig.height = 4, fig.align="center"}
@@ -409,7 +413,7 @@ Natomiast zmiennymi skorelowanymi ujemnie są zmienne związane ze śmiertelnoś
 Wartość statystyki $Z$ dla średniego czasu edukacji wynosi 0.91, co stawia Polskę bardzo wysoko. Nie jest to jednak argument za tym, by zaprzestać inwestowanie w nauczanie. Jak zostało pokazane wcześniej, edukacja ma duży wpływ na długość życia. W Polsce średni czas nauczania w 2014 roku wynosił 16.4 lat. Przypuśćmy, że czas ten zostałby wydłużony do 18 lat. Skorzystamy teraz z wcześniej wyznaczonej regresji liniowej dla zależności pomiędzy czasem nauki, a czasem życia, by wyznaczyć przedział ufności.
 
 
-# Podsumowanie
+# 9. Podsumowanie
 |      Zestawienie danych, które postanowiliśmy przeanalizować okazało się być bardzo różnorodne, a do rozpatrzenia było wiele czynników. Jak się jednak okazało, nie wszystkie okazały się być aż tak istotne. Określiliśmy to na podstawie wykresów zależności między oczekiwaną długością życia, a poszczególnymi składowymi (wykres \ref{fig:scattery_le}). Na jednych wykresach była widoczna pewna zależność w danych, za to na innych dane były mocno rozproszone. Potwierdziliśmy nasze przypuszczenia dotyczące zależności wyliczając odpowiednie współczynniki korelacji. Jednym z najbardziej skorelowanych czynników z oczekiwaną długością życia okazał się być średni czas edukacji. Występuje tam zależność liniowa, a wraz ze wzrostem czasu poświęconego na naukę, wzrasta też średnia długość życia.
 
 |      Następnie porównaliśmy średnią długość życia Polski z pozostałymi krajami. W 2015 roku osiągneliśmy wynik 77,5 lat - większy od średniej o niemal 6 lat i całościowo jest to 42 najwyższy wynik (wykres \ref{fig:barplot}). Trochę nam jednak brakuje do liderów rankingu jakim są Słoweńcy z imponującym wynikiem 88 lat. Przeanalizowaliśmy jakie rezultaty w poszczególnych kategoriach osiąga Polska na tle reszty państw i na tej podstawie pokazaliśmy co można byłoby zrobić, aby poprawić średni czas życia Polaków.
