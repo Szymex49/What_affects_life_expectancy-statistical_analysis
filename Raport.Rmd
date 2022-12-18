@@ -260,7 +260,7 @@ $$S(a,b) = \sum_{i = 1}^n (y_i - ax_i - b)^2$$
 przyjmuje wartość najmniejszą. Rozwiązaniem jest para estymatorów
 $$
     \begin{cases}
-      \hat{a} = R\frac{S_y}{S_x} \\
+      \hat{a} = R\frac{S_y}{S_x} = \frac{\sum_{i = 1}^n(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i = 1}^n(x_i - \bar{x})^2}\\
       \hat{b} = \bar{y} - a\bar{x}
     \end{cases}
 $$
@@ -325,7 +325,12 @@ $$ Y_i = a\log(x_i) + b + \epsilon_i, $$
 gdzie $x_i$ są danymi z PKB, a $\epsilon_i$ są i.i.d. o średniej równej 0 i skończonej wariancji. Aby jednak otrzymać model lioniowy jak w punkcie 6, podstawiamy $z_i = log(x_i)$ i otrzymujemy
 $$ Y_i = az_i + b. $$
 Teraz już możemy skorzystać z metody najmniejszych kwadratów, aby dopasować prostą regresji. W ten sposób otrzymujemy estymatory postaci
-$$  $$
+$$
+    \begin{cases}
+      \hat{a} = \frac{\sum_{i = 1}^n(z_i - \bar{z})(y_i - \bar{y})}{\sum_{i = 1}^n(z_i - \bar{z})^2} \\
+      \hat{b} = \bar{y} - a\bar{z}
+    \end{cases}
+$$
 
 ```{r reg_gdp_final, fig.cap="\\label{fig:reg_gdp_final} Po lewej prosta regresji dla przetransformowanych danych. Po prawej krzywa regresji dopasowana do oryginalnych danych.", fig.align="center", fig.width =6, fig.height = 2}
 c(a1, b1) %<-% regression(log(df2$GDP), df2$life_expectancy, display_plot=FALSE)
