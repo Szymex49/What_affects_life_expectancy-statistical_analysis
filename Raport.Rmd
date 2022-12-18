@@ -26,6 +26,28 @@ library(cowplot)
 data <- read.csv("data/data.csv")
 data2014 <- data %>% filter(year == 2014)
 data2015 <- data %>% filter(year == 2015)
+
+
+regression <- function(X, Y, xlabel="", ylabel="", display_plot=TRUE){
+    r <- cor(X, Y, use="pairwise.complete.obs")
+    Sx <- sd(X)
+    Sy <- sd(Y)
+    a <- r * Sy / Sx
+    b <- mean(Y) - a * mean(X)
+
+    if(display_plot){
+        xs <- seq(min(X), max(X), 0.01)
+        plt <- ggplot() +
+            geom_point(aes(x=X, y=Y), alpha=0.5) +
+            geom_line(aes(x = xs, y = a * xs + b), linewidth=1, col="red") +
+            xlab(xlabel) + 
+            ylab(ylabel)
+        show(plt)
+    }
+    else{
+      return(c(a, b))
+    }
+}
 ```
 
 
@@ -92,7 +114,7 @@ przeciw błonicy i krztuścowi wśród 1-latków podana w procentach.
 
 
 
-# Braki w danych
+# Brakujące dane
 |      Zanim przejdziemy do analizy naszych danych, sprawdźmy, czy zawierają one jakieś braki. W tym celu zliczamy wszystkie brakujące wartości dla każdej zmiennej liczbowej w każdym roku.
 
 ```{r tabela_na, fig.cap="\\label{fig:tabela_na} Liczba brakujących wartości dla każdej zmiennej liczbowej w każdym roku."}
@@ -119,7 +141,7 @@ kable(df)
 
 
 
-# Devoloped a developing
+# Porównanie krajów rozwiniętych i rozwijających się
 |      Spodziewamy się, że w krajach lepiej rozwiniętych długość życia jest większa niż w krajach uboższych. Żeby przekonać się, czy w rzeczywistości tak jest, porównamy średnie dla obu typów krajów dla każdego roku. Ponieważ państwa zawarte w danych znacznie różnią się populacją, nie możemy traktować ich na równi. Z tego powodu skorzystamy z średniej ważonej, gdzie wagami będą populacje.
 
 ```{r le_dd, fig.cap="\\label{fig:le_dd} Porównanie średniej długości życia dla krajów wysoko i słabo rozwiniętych", fig.align="center", fig.width = 5, fig.height = 3}
@@ -157,9 +179,10 @@ plt1 <- ggplot() + geom_point(aes(data$schooling, data$life_expectancy, col=data
 scale_color_manual(values=c('#1cb900', '#ce0000')) + xlab("Lata nauki") + ylab("Długość życia") + theme(legend.position='none')
 
 ```
-```{r schooling_dd, fig.cap="\\label{fig:schooling_dd} Wykres punktowy długości życia od czasu nauczania", fig.width = 12, fig.height = 4} 
+```{r schooling_dd, fig.cap="\\label{fig:schooling_dd} Wykresy punktowe długości życia, po lewej od czasu nauczania, po prawej od PKB.", fig.width = 12, fig.height = 4}
 plt2 <- ggplot() + geom_point(aes(data$GDP, data$life_expectancy, col=data$status), alpha=0.3, size=0.6) +
-scale_color_manual(values=c('#1cb900', '#ce0000')) + xlab("PKB") + ylab("Długość życia") + labs(col="")
+scale_color_manual(values=c('#1cb900', '#ce0000')) + xlab("PKB") + 
+theme(axis.text.y=element_blank(), axis.title.y=element_blank()) + labs(col="")
 
 plot_grid(plt1, plt2)
 ```
@@ -179,10 +202,11 @@ data[4:22] %>%
   ggplot(aes(x = value, y = life_expectancy)) +
     geom_point(size=0.4, alpha=0.4, col='#0575d0', stroke=0) +
     facet_wrap(~ var, scales='free', nrow=6) +
-  scale_x_discrete() +
-  scale_y_discrete() + theme(
-  plot.title = element_text(hjust = 0.5, size = 24),
-)
+    xlab("") +
+    scale_x_discrete() +
+    scale_y_discrete() + theme(
+    plot.title = element_text(hjust = 0.5, size = 24),
+    )
 ```
 
 ```{r tabela_korelacji, fig.cap="\\label{fig:tabela_korelacji} Tabela korelacji Spearmana między oczekiwaną długością życia, a poszczególnymi zmiennymi dla każdego roku."}
@@ -222,45 +246,27 @@ $$
     \end{cases}
 $$
 gdzie $R$ jest współczynnikiem korelacji Pearsona, a $S_x, S_y$ są próbkowymi odchyleniami standardowymi.
-```{r}
-regression <- function(X, Y, display_plot=TRUE){
-    r <- cor(X, Y, use="pairwise.complete.obs")
-    Sx <- sd(X)
-    Sy <- sd(Y)
-    a <- r * Sy / Sx
-    b <- mean(Y) - a * mean(X)
 
-    if(display_plot){
-        xs <- seq(min(X), max(X), 0.01)
-        plt <- ggplot() +
-            geom_point(aes(x=X, y=Y), alpha=0.5) +
-            geom_line(aes(x = xs, y = a * xs + b), linewidth=1, col="red")
-        show(plt)
-    }
-    else{
-      return(c(a, b))
-    }
-}
-```
-
-```{r scatter_schooling, fig.cap="\\label{fig:scatter_schooling} Prosta regresji dla danych", fig.align="center", fig.width = 4, fig.height = 3}
+```{r scatter_schooling, fig.cap="\\label{fig:scatter_schooling} Prosta regresji wyznaczona dla danych.", fig.align="center", fig.width = 4, fig.height = 3}
 
 df <- data[(!is.na(data$schooling)) & (!is.na(data$life_expectancy)) & (data$year == 2015),]
-regression(df$schooling, df$life_expectancy)
+regression(df$schooling, df$life_expectancy, "Lata nauki", "Długość życia")
 ```
 
 \newpage
-|      Kolejnym punktem będzie analiza residuów (błędów)
+Kolejnym punktem będzie analiza residuów (błędów)
 $$e_i = y_i - \hat{y}_i\;,$$
 gdzie $\hat{y}_i = \hat{a}x_i + \hat{b}$. W celu zbadania rozkładu residuów, spójrzmy na ich histogram
 
-```{r hist_schooling, fig.cap="\\label{fig:hist_schooling} Histogram residuów", fig.align="center", fig.width = 4, fig.height = 3}
+```{r hist_schooling, fig.cap="\\label{fig:hist_schooling} Histogram residuów.", fig.align="center", fig.width = 4, fig.height = 3}
 ab <- regression(df$schooling, df$life_expectancy, display_plot = FALSE)
 a <- ab[1]
 b <- ab[2]
 e <- df$life_expectancy - a*df$schooling - b
-hist_e <- ggplot(data.frame(e = e), aes(e)) + geom_histogram(aes(y = after_stat(density)), fill = 'white', color = 'black')
-hist_e
+ggplot(data.frame(e = e), aes(e)) + 
+  geom_histogram(aes(y = after_stat(density)), fill = 'white', color = 'black') + 
+  xlab("Wartość błędu") +
+  theme(axis.title.y = element_blank())
 ```
 
 Kształt histogramu jest zbliżony do krzywej gaussowskiej. Średnia wartość residuów wynosi $\mu_e = 0$, a ich wariancja $\sigma_e^2 = 20,81$. Posłużymy się testem Kołmogorowa-Smirnova w celu zbadania normalności rozkładu błędów. Przedstawmy hipotezy:
@@ -271,8 +277,7 @@ Kształt histogramu jest zbliżony do krzywej gaussowskiej. Średnia wartość r
 \end{itemize}
 
 ```{r, echo = FALSE, eval = FALSE}
-test <- ks.test(e, 'pnorm', mean(e), sd(e))
-test
+ks.test(e, 'pnorm', 0, sd(e))
 ```
 
 Niech $\alpha = 0,05$ będzie poziomem istotności naszego testu. Wyznaczona p-wartość wynosi $p = 0,2532$. Ponieważ otrzymany wynik jest wystarczająco duży, to nie mamy podstaw do odrzucenia hipotezy zerowej i na zadanym poziomie istotności możemy przyjąć, że dane pochodzą z rozkładu normalnego $\mathcal{N}(0, 20.81)$. 
@@ -282,44 +287,47 @@ Niech $\alpha = 0,05$ będzie poziomem istotności naszego testu. Wyznaczona p-w
 
 Podobnie jak w przypadku długości edukacji, będziemy analizować dane dotyczące PKB wyłącznie z 2015 roku. W przeciwieństwie do poprzedniego przypadku, dane te nie mają zależności liniowej, a kształtem przypomina bardziej logarytmiczną. W tym celu, zrobimy transformację danych do postaci liniowej, żeby móc później skorzystać z metody najmniejszych kwadratów. Innymi słowy $\tilde{x} = \log(x)$
 
-```{r scatter_gdp, fig.cap="\\label{fig:scatter_gdp} Zależność długości życia od PKB w 2015 roku", fig.align="center", fig.width = 6, fig.height = 2}
+```{r scatter_gdp_line, fig.cap="\\label{fig:scatter_gdp_line} Wykresy punktowe z surowych danych po lewej i z przetransformowanych po prawej.", fig.align="center", fig.width = 6, fig.height = 2}
 df2 <- data[(!is.na(data$GDP)) & (!is.na(data$life_expectancy)) & (data$year == 2015),]
 scat2 <- ggplot(data = df2, mapping = aes(x = GDP, y = life_expectancy)) + geom_point()
-```
-
-
-```{r scatter_gdp_line, fig.cap="\\label{fig:scatter_gdp_line} Transformacja danych do postaci liniowej", fig.align="center", fig.width = 6, fig.height = 2}
 scat2_mod <- ggplot(data = df2, mapping = aes(x = log(GDP), y = life_expectancy)) + geom_point()
 plot_grid(scat2, scat2_mod)
 ```
+
 \newpage
 Następnie dopasowujemy prostą regresji z MNK. Ostatecznie wykonujemy transformację odwrotną dla danych, wraz z wyznaczoną prostą, co w rezultacie da krzywą logarytmiczną dopasowaną do danych.
 
-```{r reg_gdp, fig.cap="\\label{fig:reg_gdp} Prosta regresji dla przetransformowanych danych", fig.align="center", fig.width = 6, fig.height = 2}
-c(a1, b1) %<-% regression(log(df2$GDP), df2$life_expectancy, FALSE)
+```{r reg_gdp_final, fig.cap="\\label{fig:reg_gdp_final} Po lewej prosta regresji dla przetransformowanych danych. Po prawej krzywa regresji dopasowana do oryginalnych danych.", fig.align="center", fig.width =6, fig.height = 2}
+c(a1, b1) %<-% regression(log(df2$GDP), df2$life_expectancy, display_plot=FALSE)
 xs1 <- seq(min(log(df2$GDP)), max(log(df2$GDP)), 0.1)
-reg2 <- ggplot() + geom_point(aes(log(df2$GDP), df2$life_expectancy), alpha = 0.5) + geom_line(aes(xs1, a1*xs1 + b1), col='red', linewidth=1)
-```
+reg2 <- ggplot() + geom_point(aes(log(df2$GDP), df2$life_expectancy), alpha = 0.5) + 
+  geom_line(aes(xs1, a1*xs1 + b1), col='red', linewidth=1) +
+  xlab("log(PKB)") +
+  ylab("Długość życia")
 
-```{r reg_gdp_final, fig.cap="\\label{fig:reg_gdp_final} Regresja logarytmiczna orginalnych danych", fig.align="center", fig.width =6, fig.height = 2}
-c(a2, b2) %<-% regression(log(df2$GDP), df2$life_expectancy, FALSE)
+c(a2, b2) %<-% regression(log(df2$GDP), df2$life_expectancy, display_plot=FALSE)
 xs2 <- seq(0.1, max(df2$GDP), 10)
-reg2_final <- ggplot() + geom_point(aes(df2$GDP, df2$life_expectancy), alpha = 0.5) + geom_line(aes(xs2, a2*log(xs2) + b2), col='red', linewidth=1)
+reg2_final <- ggplot() + geom_point(aes(df2$GDP, df2$life_expectancy), alpha = 0.5) + 
+  geom_line(aes(xs2, a2*log(xs2) + b2), col='red', linewidth=1) +
+  xlab("PKB") +
+  theme(axis.title.y = element_blank())
+
 plot_grid(reg2, reg2_final)
 ```
 Następnie zbadamy czy residua mają jakiś rozkład. Pomoże nam w tym histogram.
 
-```{r hist_gdp, fig.cap="\\label{fig:hist_gdp} Histogram residuów", fig.align="center", fig.width = 4, fig.height = 3}
+```{r hist_gdp, fig.cap="\\label{fig:hist_gdp} Histogram residuów.", fig.align="center", fig.width = 4, fig.height = 3}
 e <- df2$life_expectancy - a2*log(df2$GDP) - b2
-hist_e <- ggplot(data.frame(e = e), aes(e)) + geom_histogram(aes(y = after_stat(density)), fill = 'white', color = 'black')
-hist_e
+ggplot(data.frame(e = e), aes(e)) + 
+  geom_histogram(aes(y = after_stat(density)), fill = 'white', color = 'black') +
+  xlab("Wartość błędu") + 
+  theme(axis.title.y = element_blank())
 ```
 
 Średnia residuów $\mu_e = 0$ natomiast odchylenie standardowe $\sigma_e \approx 7,07$. Z kształtu histogramu można przypuszczać, że wartości residuów pochodzą z rozkładu normalnego. Aby zweryfikować tą hipotezę, ponownie posłużymy się testem Kołmogorowa-Smirnova na poziomie istotności $\alpha = 0,05$.
 
 ```{r, echo = FALSE, eval = FALSE}
-test <- ks.test(e, 'pnorm', mean(e), sd(e))
-test
+ks.test(e, 'pnorm', 0, sd(e))
 ```
 Jak pokazuje wynik p-wartość $p = 0,9126$ jest znacznie większa od poziomu istotności $\alpha$. Nie mamy zatem podstaw do odrzucenia hipotezy o braku normalności tego rozkładu. Możemy zatem przyjąć, że rozkład residuów jest rozkładem normalnym $\mathcal{N}(\mu_e, \sigma_e) = \mathcal{N}(0, 7,07)$.
 
@@ -342,11 +350,13 @@ bar2 <- ggplot(data = rbind(head(df, 5), df[df$country == 'Poland',], tail(df, 5
 
 bar2
 ```
+
 \newpage
 Zdefiniujmy statystykę $Z$ w następujący sposób
 $$ Z_X(x_0) = \frac{\#\left\{x \in X: x < x_0 \right\}}{\#X}. $$
 Mówi ona jaka część liczb ze zbioru $X$ jest poniżej wartości $x_0$. Wykorzystamy ją, by policzyć jaka część państw jest poniżej wartości każdej zmiennej dla Polski. Statystyki te wyliczymy dla roku 2014, ponieważ w roku 2015 występuje sporo braków danych.
 \newpage
+
 ```{r polska_porownanie}
 pol <- data2014 %>% filter(country == "Poland")
 stats <- c()
