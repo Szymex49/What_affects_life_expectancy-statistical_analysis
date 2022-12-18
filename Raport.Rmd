@@ -313,7 +313,7 @@ plot_grid(scat2, scat2_mod)
 
 Możemy zauważyć, że dane po transformacji przypominają bardziej zależne liniowo, choć są dość mocno rozrzucone. Współczynnik korelacji Pearsona dla przetransformowanych danych wynosi 0.52. Przyjmnijmy model
 $$ Y_i = a\log(x_i) + b + \epsilon_i, $$
-gdzie $x_i$ są danymi z PKB, a $\Epsilon_i$ są i.i.d. o średniej równej 0 i skończonej wariancji. Aby jednak otrzymać model lioniowy jak w punkcie 6, podstawiamy $z_i = log(x_i)$ i otrzymujemy
+gdzie $x_i$ są danymi z PKB, a $\epsilon_i$ są i.i.d. o średniej równej 0 i skończonej wariancji. Aby jednak otrzymać model lioniowy jak w punkcie 6, podstawiamy $z_i = log(x_i)$ i otrzymujemy
 $$ Y_i = az_i + b. $$
 Teraz juz możemy skorzystać z metody najmniejszych kwadratów, aby dopasować prostą regresji. Ostatecznie wykonujemy transformację odwrotną dla danych, wraz z wyznaczoną prostą, co w rezultacie da krzywą logarytmiczną dopasowaną do danych.
 
