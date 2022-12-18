@@ -106,7 +106,7 @@ przeciw błonicy i krztuścowi wśród 1-latków podana w procentach.
 
 \item $\textbf{Thinness 5-9 years}$ - proporcja osób z niedowagą wśród osób w wieku 5-9 lat. Wyrażona w procentach.
 
-\item $\textbf{Income composition of resources}$ - wskaźnik rozwoju społecznego (HDI). Podany jako liczba od 0 do 1.
+\item $\textbf{HDI}$ - wskaźnik rozwoju społecznego (HDI). Podany jako liczba od 0 do 1.
 
 \item $\textbf{Schooling}$ - średni czas trwania edukacji podany w latach.
 
@@ -121,28 +121,28 @@ przeciw błonicy i krztuścowi wśród 1-latków podana w procentach.
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
     \hline
-         & \textbf{00} & \textbf{01} & \textbf{02} & \textbf{03} & \textbf{04} & \textbf{05} & \textbf{06} & \textbf{07} & \textbf{08} & \textbf{09} & \textbf{10} & \textbf{11} & \textbf{12} & \textbf{13} & \textbf{14} & \textbf{15} \\ \hline
-        \textbf{life exp.} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 10 & 0 & 0 \\ \hline
-        \textbf{adult mortality} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 10 & 0 & 0 \\ \hline
-        \textbf{infant deaths} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
-        \textbf{alcohol} & 1 & 1 & 1 & 1 & 1 & 2 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 2 & 1 & 177 \\ \hline
-        \textbf{per. exp.} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
-        \textbf{hepatitis B} & 98 & 88 & 70 & 52 & 45 & 36 & 32 & 24 & 20 & 17 & 15 & 13 & 13 & 11 & 10 & 9 \\ \hline
-        \textbf{measles} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
-        \textbf{BMI} & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 4 & 2 & 2 \\ \hline
-        \textbf{under 5 deaths} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
-        \textbf{polio} & 3 & 3 & 2 & 2 & 2 & 2 & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\ \hline
-        \textbf{total exp.} & 4 & 4 & 4 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 2 & 2 & 2 & 181 \\ \hline
-        \textbf{diphtheria} & 3 & 3 & 2 & 2 & 2 & 2 & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\ \hline
-        \textbf{HIV AIDS} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
-        \textbf{GDP} & 29 & 28 & 28 & 28 & 27 & 27 & 27 & 27 & 27 & 27 & 27 & 27 & 29 & 33 & 28 & 29 \\ \hline
-        \textbf{population} & 40 & 40 & 40 & 40 & 40 & 40 & 40 & 40 & 40 & 40 & 40 & 40 & 41 & 49 & 41 & 41 \\ \hline
-        \textbf{thinness 1-19 y} & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 4 & 2 & 2 \\ \hline
-        \textbf{thinness 5-9 y} & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 4 & 2 & 2 \\ \hline
-        \textbf{HDI} & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 17 & 10 & 10 \\ \hline
-        \textbf{schooling} & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 13 & 10 & 10 \\ \hline
+        year & \textbf{00} & \textbf{01} & \textbf{02} & \textbf{03} & \textbf{04} & \textbf{05} & \textbf{06} & \textbf{07} & \textbf{08} & \textbf{09} & \textbf{10} & \textbf{11} & \textbf{12} & \textbf{13} & \textbf{14} & \textbf{15} \\ \hline
+        life exp. & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 10 & 0 & 0 \\ \hline
+        adult mortality & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 10 & 0 & 0 \\ \hline
+        infant deaths & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+        alcohol & 1 & 1 & 1 & 1 & 1 & 2 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 2 & 1 & 177 \\ \hline
+        perc. expend. & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+        hepatitis B & 98 & 88 & 70 & 52 & 45 & 36 & 32 & 24 & 20 & 17 & 15 & 13 & 13 & 11 & 10 & 9 \\ \hline
+        measles & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+        BMI & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 4 & 2 & 2 \\ \hline
+        under 5 deaths & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+        polio & 3 & 3 & 2 & 2 & 2 & 2 & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\ \hline
+        total expend. & 4 & 4 & 4 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 2 & 2 & 2 & 181 \\ \hline
+        diphtheria & 3 & 3 & 2 & 2 & 2 & 2 & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\ \hline
+        HIV AIDS & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+        GDP & 29 & 28 & 28 & 28 & 27 & 27 & 27 & 27 & 27 & 27 & 27 & 27 & 29 & 33 & 28 & 29 \\ \hline
+        population & 40 & 40 & 40 & 40 & 40 & 40 & 40 & 40 & 40 & 40 & 40 & 40 & 41 & 49 & 41 & 41 \\ \hline
+        thinness 1-19 y & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 4 & 2 & 2 \\ \hline
+        thinness 5-9 y & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 4 & 2 & 2 \\ \hline
+        HDI & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 17 & 10 & 10 \\ \hline
+        schooling & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 13 & 10 & 10 \\ \hline
     \end{tabular}
     \caption{Liczba brakujących wartości dla każdej kolumny i dla każdego roku.}
 \end{table}
@@ -203,7 +203,7 @@ Na obu wykresach zauważyć można, że państwa lepiej rozwinięte wyróżniaj�
 
 
 
-# 5. Analiza
+# 5. Analiza zależności
 |      Jednym z głównych celów raportu jest sprawdzenie, które czynniki mają największy wpływ na długość życia. Dobrym początkiem będzie narysowanie wykresów punktowych długości życia od poszczególnych zmiennych. Wykresy takie dają wgląd na to, jak zachowują się dane oraz pozwalają ocenić, czy występuje między nimi jakaś zależność. Dodatkowo skorzystamy ze współczynnika korelacji Spearmana, ponieważ jest to miara monotonicznej zależności, a właśnie takiej zależności szukamy. Wspomnianą korelację obliczymy między długością życia, a pozostałymi zmiennymi liczbowymi dla każdego roku z osobna.
 
 ```{r scattery_le, fig.cap="\\label{fig:scattery_le} Wykresy punktowe oczekiwanej długości życia od poszczególnych zmiennych.", fig.align="center", fig.width = 5, fig.height = 8}
@@ -219,25 +219,32 @@ data[4:22] %>%
     )
 ```
 
-```{r tabela_korelacji, fig.cap="\\label{fig:tabela_korelacji} Tabela korelacji Spearmana między oczekiwaną długością życia, a poszczególnymi zmiennymi dla każdego roku."}
-correlations <- data.frame()
-years <- sort(unique(data$year))
-for (y in years) {
-    data_year <- data %>% filter(year == y)
-    rs <- c()
-    for (column in colnames(data_year[5:22])) {
-        r <- cor(data_year$life_expectancy, data_year[column], use="pairwise.complete.obs", method="spearman")
-        rs <- append(rs, round(r, 2))
-    }
-    correlations <- rbind(correlations, rs)
-}
-correlations <- cbind(years, correlations)
-names(correlations) <- colnames(data[c(2, 5:22)])
-df <- data.frame(t(correlations), header=TRUE)
-names(df) <- lapply(df[1, ], as.character)
-df <- df[-1,1:16]
-kable(df)
-```
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+         & \textbf{00} & \textbf{01} & \textbf{02} & \textbf{03} & \textbf{04} & \textbf{05} & \textbf{06} & \textbf{07} & \textbf{08} & \textbf{09} & \textbf{10} & \textbf{11} & \textbf{12} & \textbf{13} & \textbf{14} & \textbf{15} \\ \hline
+        adult mortality & -0.56 & -0.57 & -0.58 & -0.54 & -0.74 & -0.54 & -0.59 & -0.61 & -0.78 & -0.71 & -0.71 & -0.72 & -0.67 & -0.69 & -0.73 & -0.74 \\ \hline
+        infant deaths & -0.58 & -0.61 & -0.62 & -0.61 & -0.62 & -0.61 & -0.62 & -0.61 & -0.61 & -0.6 & -0.59 & -0.6 & -0.59 & -0.58 & -0.58 & -0.58 \\ \hline
+        alcohol & 0.43 & 0.41 & 0.44 & 0.43 & 0.44 & 0.44 & 0.46 & 0.45 & 0.45 & 0.43 & 0.44 & 0.44 & 0.57 & 0.56 & 0.59 & 0.2 \\ \hline
+        perc. expend. & 0.52 & 0.49 & 0.53 & 0.54 & 0.51 & 0.54 & 0.53 & 0.49 & 0.46 & 0.51 & 0.49 & 0.46 & 0.51 & 0.45 & 0.42 & 0 \\ \hline
+        hepatitis B & 0.14 & 0.18 & 0.3 & 0.35 & 0.32 & 0.34 & 0.33 & 0.36 & 0.39 & 0.36 & 0.38 & 0.33 & 0.33 & 0.39 & 0.42 & 0.47 \\ \hline
+        measles & -0.45 & -0.46 & -0.45 & -0.39 & -0.26 & -0.2 & -0.27 & -0.22 & -0.14 & -0.21 & -0.26 & -0.15 & -0.2 & -0.2 & -0.21 & -0.23 \\ \hline
+        BMI & 0.6 & 0.64 & 0.65 & 0.6 & 0.56 & 0.48 & 0.61 & 0.62 & 0.6 & 0.61 & 0.55 & 0.55 & 0.55 & 0.53 & 0.51 & 0.55 \\ \hline
+        under 5 deaths & -0.61 & -0.63 & -0.63 & -0.63 & -0.63 & -0.62 & -0.63 & -0.63 & -0.62 & -0.63 & -0.62 & -0.63 & -0.62 & -0.6 & -0.6 & -0.6 \\ \hline
+        polio & 0.58 & 0.57 & 0.57 & 0.59 & 0.49 & 0.49 & 0.51 & 0.5 & 0.53 & 0.43 & 0.52 & 0.5 & 0.52 & 0.54 & 0.53 & 0.56 \\ \hline
+        total expend. & 0.3 & 0.28 & 0.26 & 0.25 & 0.25 & 0.26 & 0.31 & 0.3 & 0.19 & 0.31 & 0.34 & 0.17 & 0.3 & 0.36 & 0.37 & -1 \\ \hline
+        diphtheria & 0.52 & 0.6 & 0.58 & 0.59 & 0.56 & 0.52 & 0.52 & 0.54 & 0.52 & 0.47 & 0.52 & 0.49 & 0.51 & 0.56 & 0.52 & 0.55 \\ \hline
+        HIV AIDS & -0.72 & -0.73 & -0.71 & -0.74 & -0.76 & -0.76 & -0.76 & -0.77 & -0.77 & -0.77 & -0.76 & -0.78 & -0.76 & -0.77 & -0.77 & -0.78 \\ \hline
+        GDP & 0.65 & 0.66 & 0.7 & 0.68 & 0.65 & 0.68 & 0.63 & 0.59 & 0.59 & 0.62 & 0.59 & 0.6 & 0.66 & 0.61 & 0.58 & 0.57 \\ \hline
+        population & -0.14 & -0.32 & -0.13 & -0.17 & -0.07 & -0.02 & -0.17 & -0.14 & -0.17 & 0.06 & 0.01 & -0.03 & 0.01 & -0.13 & -0.14 & -0.01 \\ \hline
+        thinness 1-19 y & -0.54 & -0.5 & -0.58 & -0.56 & -0.59 & -0.6 & -0.65 & -0.67 & -0.68 & -0.67 & -0.62 & -0.61 & -0.58 & -0.62 & -0.62 & -0.64 \\ \hline
+        thinness 5-9 y & -0.54 & -0.5 & -0.55 & -0.57 & -0.6 & -0.67 & -0.7 & -0.67 & -0.67 & -0.66 & -0.62 & -0.61 & -0.61 & -0.63 & -0.66 & -0.66 \\ \hline
+        HDI & 0.72 & 0.78 & 0.77 & 0.79 & 0.8 & 0.82 & 0.89 & 0.89 & 0.88 & 0.87 & 0.89 & 0.9 & 0.9 & 0.9 & 0.9 & 0.91 \\ \hline
+        schooling & 0.77 & 0.76 & 0.76 & 0.77 & 0.78 & 0.78 & 0.82 & 0.81 & 0.79 & 0.78 & 0.81 & 0.82 & 0.82 & 0.83 & 0.84 & 0.84 \\ \hline
+    \end{tabular}
+    \caption{Tabela korelacji Spearmana między oczekiwaną długością życia, a poszczególnymi zmiennymi dla każdego roku.}
+\end{table}
 
 Możemy zauważyć, że rozrzut punktów na poszczególnych wykresach jest bardzo zróżnicowany. Na jednych wydaje się on być całkowicie losowy, natomiast na innych widać pewną zależność. Z tabeli korelacji odczytać możemy, że najsilniejszą ujemną zależność z oczekiwanym czasem życia mają zmienne związane ze śmiertelnością oraz niedowaga. Natomiast pozytywną korelację przejawiają zmienne takie jak BMI, zasięg szczepień na błonicę oraz polio, PKB, a w szczególności średni czas nauczania i wskaźnik rozwoju społecznego. Wysoka korelacja tego ostatniego nie jest zaskoczeniem, ponieważ wskaźnik ten jest wyliczany m. in. z oczekiwanego czasu życia, a więc wartości te naturalnie są od siebie zależne. Interesująca może być za to zależność pomiędzy czasem życia, a nauczaniem. Na wykresie punktowym zauważyć można między nimi liniową korelację. Z kolei, jeśli spojrzymy na wykres dotyczący PKB, na myśl przychodzi nam zależność logarytmiczna. Aby dokładniej zbadać te zależności, poddamy wspomniane zmienne głębszej analizie.
 
@@ -246,7 +253,9 @@ Możemy zauważyć, że rozrzut punktów na poszczególnych wykresach jest bardz
 
 
 # 6. Wpływ edukacji na długość życia
-|      Jako pierwszy przeanalizujemy wpływ czasu edukacji na oczekiwaną długość życia. W tym przypadku rozważymy dane wyłącznie z 2015 roku, czyli te najbardziej aktualne. Na wykresie \ref{fig:scatter_schooling} można zauważyć liniową zależność danych, zatem do zbadania korelacji możemy użyć współczynnika Pearsona. Przyjmuje on wartość $R \approx 0,752$, więc jest to dość mocna korelacja. Dopasujemy teraz do danych prostą regresji korzystając z metody najmniejszych kwadratów. Metoda ta polega na znalezieniu takich współczynników $a, b$ dla których funkcja
+|      Jako pierwszy przeanalizujemy wpływ czasu edukacji na oczekiwaną długość życia. W tym przypadku rozważymy dane wyłącznie z 2015 roku, czyli te najbardziej aktualne. Na wykresie \ref{fig:scatter_schooling} można zauważyć liniową zależność danych, zatem do zbadania korelacji możemy użyć współczynnika Pearsona. Przyjmuje on wartość $R \approx 0,752$, więc jest to dość mocna korelacja. Dopasujemy teraz do danych prostą regresji korzystając z metody najmniejszych kwadratów. Przyjmijmy model
+$$ Y_i = ax_i + b + \epsilon_i, $$
+gdzie $x_i$ to dane dotyczące czasu nauczania, a $\epsilon_i$ są i.i.d. ze średnią równą 0 i skończoną wariancją. Oznaczmy dane z czasem życia jako $y_i$. Wspomniana metoda polega na znalezieniu takich współczynników $a, b$ dla których funkcja
 $$S(a,b) = \sum_{i = 1}^n (y_i - ax_i - b)^2$$
 przyjmuje wartość najmniejszą. Rozwiązaniem jest para estymatorów
 $$
@@ -315,7 +324,8 @@ Możemy zauważyć, że dane po transformacji przypominają bardziej zależne li
 $$ Y_i = a\log(x_i) + b + \epsilon_i, $$
 gdzie $x_i$ są danymi z PKB, a $\epsilon_i$ są i.i.d. o średniej równej 0 i skończonej wariancji. Aby jednak otrzymać model lioniowy jak w punkcie 6, podstawiamy $z_i = log(x_i)$ i otrzymujemy
 $$ Y_i = az_i + b. $$
-Teraz juz możemy skorzystać z metody najmniejszych kwadratów, aby dopasować prostą regresji. Ostatecznie wykonujemy transformację odwrotną dla danych, wraz z wyznaczoną prostą, co w rezultacie da krzywą logarytmiczną dopasowaną do danych.
+Teraz już możemy skorzystać z metody najmniejszych kwadratów, aby dopasować prostą regresji. W ten sposób otrzymujemy estymatory postaci
+$$  $$
 
 ```{r reg_gdp_final, fig.cap="\\label{fig:reg_gdp_final} Po lewej prosta regresji dla przetransformowanych danych. Po prawej krzywa regresji dopasowana do oryginalnych danych.", fig.align="center", fig.width =6, fig.height = 2}
 c(a1, b1) %<-% regression(log(df2$GDP), df2$life_expectancy, display_plot=FALSE)
@@ -334,23 +344,8 @@ reg2_final <- ggplot() + geom_point(aes(df2$GDP, df2$life_expectancy), alpha = 0
 
 plot_grid(reg2, reg2_final)
 ```
-Następnie zbadamy czy residua mają jakiś rozkład. Pomoże nam w tym histogram.
 
-```{r hist_gdp, fig.cap="\\label{fig:hist_gdp} Histogram residuów.", fig.align="center", fig.width = 4, fig.height = 3}
-e <- df2$life_expectancy - a2*log(df2$GDP) - b2
-ggplot(data.frame(e = e), aes(e)) + 
-  geom_histogram(aes(y = after_stat(density)), fill = 'white', color = 'black') +
-  xlab("Wartość błędu") + 
-  theme(axis.title.y = element_blank())
-```
-
-Średnia residuów $\mu_e = 0$ natomiast odchylenie standardowe $\sigma_e \approx 7,07$. Z kształtu histogramu można przypuszczać, że wartości residuów pochodzą z rozkładu normalnego. Aby zweryfikować tą hipotezę, ponownie posłużymy się testem Kołmogorowa-Smirnova na poziomie istotności $\alpha = 0,05$.
-
-```{r, echo = FALSE, eval = FALSE}
-ks.test(e, 'pnorm', 0, sd(e))
-```
-Jak pokazuje wynik p-wartość $p = 0,9126$ jest znacznie większa od poziomu istotności $\alpha$. Nie mamy zatem podstaw do odrzucenia hipotezy o braku normalności tego rozkładu. Możemy zatem przyjąć, że rozkład residuów jest rozkładem normalnym $\mathcal{N}(\mu_e, \sigma_e) = \mathcal{N}(0, 7.07)$.
-
+Jak możemy zobaczyć, krzywa logarytmiczna w miarę pokrywa się z danymi, więc można przyjać ją za przybliżenie zależności pomiędzy dwoma zmiennymi. Ważną obserwacją jest to, że największy wzrost mamy dla bardzo małych wartości PKB - im jest większe, tym wolniej rośnie długość życia. Oznacza to, że dla państw z małym PKB, nawet niewielki jego wzrost może przyczynić się do znacznego zwiększenia długości życia, zaś dla państw lepiej rozwinietych, wzrost PKB ma już na to nieznaczny wpływ.
 
 
 
@@ -379,20 +374,33 @@ Zdefiniujmy statystykę $Z$ w następujący sposób
 $$ Z_X(x_0) = \frac{\#\left\{x \in X: x < x_0 \right\}}{\#X}. $$
 Mówi ona jaka część liczb ze zbioru $X$ jest poniżej wartości $x_0$. Wykorzystamy ją, by policzyć jaka część państw jest poniżej wartości każdej zmiennej dla Polski. Statystyki te wyliczymy dla roku 2014, ponieważ w roku 2015 występuje sporo braków danych.
 
-
-```{r polska_porownanie}
-pol <- data2014 %>% filter(country == "Poland")
-stats <- c()
-
-for (column in colnames(data)[4:22]) {
-    F <- ecdf(data2014[,column])
-    stats <- append(stats, round(F(pol[column]), 2))
-}
-
-df <- data.frame(colnames(data)[4:22], stats)
-colnames(df) <- c("Zmienna", "Wartość statystyki Z")
-kable(df)
-```
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|}
+    \hline
+        \textbf{Zmienna} & \textbf{Wartość statystyki $Z$} \\ \hline
+        life expectancy & 0.77 \\ \hline
+        adult mortality & 0.07 \\ \hline
+        infant deaths & 0.5 \\ \hline
+        alcohol & 0.94 \\ \hline
+        percentage expenditure & 0.6 \\ \hline
+        hepatitis B & 0.73 \\ \hline
+        measles & 0.37 \\ \hline
+        BMI & 0.77 \\ \hline
+        under five deaths & 0.47 \\ \hline
+        polio & 0.55 \\ \hline
+        total expenditure & 0.55 \\ \hline
+        diphtheria & 0.87 \\ \hline
+        HIV AIDS & 0.63 \\ \hline
+        GDP & 0.83 \\ \hline
+        population & 0.64 \\ \hline
+        thinness 1-19 years & 0.35 \\ \hline
+        thinness 5-9 years & 0.36 \\ \hline
+        HDI & 0.85 \\ \hline
+        schooling & 0.91 \\ \hline
+    \end{tabular}
+    \caption{Wartości statystyki $Z$ dla każdej zmiennej w przypadku Polski.}
+\end{table}
 
 Przypomnijmy, że zmienne wpływające pozytywnie na długość życia to BMI, zasięg szczepień na błonicę oraz polio, PKB, średni czas nauczania i wskaźnik rozwoju społecznego. Na powyższej tabeli zauważymy, że z wymienionych zmiennych najniższą wartość ma statystyka obliczona dla szczepień na polio i wynosi ona 0.55, co stawia nasz kraj lekko powyżej połowy. Stąd, aby zwiększyć długość życia Polaków, państwo mogłoby zwiększyć zasięg szczepień na wspomnianą chorobę.
 
