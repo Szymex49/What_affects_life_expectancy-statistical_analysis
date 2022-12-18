@@ -305,7 +305,7 @@ ks.test(e, 'pnorm', 0, sd(e))
 
 Niech $\alpha = 0,05$ będzie poziomem istotności naszego testu. Wyznaczona p-wartość wynosi $p = 0,2532$. Ponieważ otrzymany wynik jest wystarczająco duży, to nie mamy podstaw do odrzucenia hipotezy zerowej i na zadanym poziomie istotności możemy przyjąć, że dane pochodzą z rozkładu normalnego $\mathcal{N}(0, 20.81)$. 
 
-
+Analiza residuów jest niezwykle istotna, kiedy robimy predykcję danych. Znając rozkład szumu, możemy wyznaczyć przedziały ufności o danym poziomie istotności dla przewidywanych wyników. Innymi słowy możemy wyznaczyć prawdopodobieństwo z jakim predykowana wartość zmieści się w konkretnym przedziale. 
 
 
 
@@ -415,7 +415,6 @@ Przypomnijmy, że zmienne wpływające pozytywnie na długość życia to BMI, z
 
 Natomiast zmiennymi skorelowanymi ujemnie są zmienne związane ze śmiertelnością oraz niedowagą. W tabeli zobaczymy, że śmiertelność u dorosłych w Polsce jest bardzo niska, jednak śmiertelność w przypadku niemowląt i dzieci poniżej 5-tego roku życia stawia nasze państwo mniej więcej po środku w stosunku do reszty świata. Z kolei watości statystyki $Z$ dla kolumn dotyczących niedowagi mieszczą się w okolicach 0.35, co także nie jest najlepszym wynikiem. Dobrą strategią byłoby zatem zapobieganie zgonów u małych dzieci w pierwszej kolejności, a następnie walka z niedowagą.
 
-Wartość statystyki $Z$ dla średniego czasu edukacji wynosi 0.91, co stawia Polskę bardzo wysoko. Nie jest to jednak argument za tym, by zaprzestać inwestowanie w nauczanie. Jak zostało pokazane wcześniej, edukacja ma duży wpływ na długość życia. W Polsce średni czas nauczania w 2014 roku wynosił 16.4 lat. Przypuśćmy, że czas ten zostałby wydłużony do 18 lat. Skorzystamy teraz z wcześniej wyznaczonej regresji liniowej dla zależności pomiędzy czasem nauki, a czasem życia, by wyznaczyć przedział ufności.
 
 
 # 9. Podsumowanie
