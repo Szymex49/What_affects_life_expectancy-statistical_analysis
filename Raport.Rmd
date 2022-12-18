@@ -56,7 +56,7 @@ regression <- function(X, Y, xlabel="", ylabel="", display_plot=TRUE){
 
 # 1. Wstęp
 <!-- Akapit - 6 spacji -->
-|      Celem niniejszej pracy jest przeanalizowanie, jak poszczególne czynniki zewnętrzne wpływają na długość naszego życia. Do analizy posłużymy się zbiorem danych charakteryzującym wiele państw świata pod kilkoma aspektami, takimi jak średni czas edukacji, spożycie alkoholu, czy powszechność szczepień na poszczególne choroby. Dane dostępne są [$\color{blue}{\text{tutaj}}$](https://www.kaggle.com/datasets/kumarajarshi/life-expectancy-who?fbclid=IwAR2HtwUPyioM4tHmuae7B2owTUB8q3XlmpP12LbTM9NYDsi4qtaWGOYoNDE). Postaramy się odpowiedzieć na pytanie, co najlepiej wpływa na długość życia, a co wręcz przeciwnie. Wnioski wyciągnięte z analizy wyskorzystamy, by znaleźć dla Polski możliwe drogi do zwiększenia średniego czasu życia jej obywateli.
+|      Celem niniejszej pracy jest przeanalizowanie, jak poszczególne czynniki zewnętrzne wpływają na długość naszego życia. Do analizy posłużymy się zbiorem danych charakteryzującym wiele państw świata pod kilkoma aspektami, takimi jak średni czas edukacji, spożycie alkoholu, czy powszechność szczepień na różne choroby. Dane dostępne są [$\color{blue}{\text{tutaj}}$](https://www.kaggle.com/datasets/kumarajarshi/life-expectancy-who?fbclid=IwAR2HtwUPyioM4tHmuae7B2owTUB8q3XlmpP12LbTM9NYDsi4qtaWGOYoNDE). Postaramy się odpowiedzieć na pytanie, co najlepiej wpływa na długość życia, a co wręcz przeciwnie. Wnioski wyciągnięte z analizy wyskorzystamy, by znaleźć dla Polski możliwe drogi do zwiększenia średniego czasu życia jej obywateli.
 
 
 
@@ -72,7 +72,7 @@ regression <- function(X, Y, xlabel="", ylabel="", display_plot=TRUE){
 
 \item $\textbf{Status}$ - odnosi się do stopnia rozwoju państw. Jest podzielona na dwie zasadnicze kategorie: developing, czyli państwa wciąż rozwijające się (stanowią 83\% wszystkich wartości), oraz developed, czyli te już rozwinięte (pozostałe 17\%).
 
-\item $\textbf{Life expectancy}$ - czyli oczekiwana długość życia. Podana jest w latach.
+\item $\textbf{Life expectancy}$ - oczekiwana długość życia. Podana jest w latach.
 
 \item $\textbf{Adult mortality}$ - mówi nam o śmiertelności wśród osób dorosłych. Podane wartości oznaczają liczbę zgonów osób między 15, a 60 rokiem życia przypadającą na 1000 osób.
 
@@ -103,11 +103,11 @@ przeciw błonicy i krztuścowi wśród 1-latków podany w procentach.
 
 \item $\textbf{Population}$ - populacja danego kraju.
 
-\item $\textbf{Thinness 1-19 years}$ - proporcja osób z niedowagą wśród osób w wieku 10-19 lat. Wyrażona w procentach.
+\item $\textbf{Thinness 1-19 years}$ - proporcja osób z niedowagą wśród osób w wieku 10-19 lat, wyrażona w procentach.
 
-\item $\textbf{Thinness 5-9 years}$ - proporcja osób z niedowagą wśród osób w wieku 5-9 lat. Wyrażona w procentach.
+\item $\textbf{Thinness 5-9 years}$ - proporcja osób z niedowagą wśród osób w wieku 5-9 lat, wyrażona w procentach.
 
-\item $\textbf{HDI}$ - wskaźnik rozwoju społecznego (HDI). Podany jako liczba od 0 do 1.
+\item $\textbf{HDI}$ - wskaźnik rozwoju społecznego, podany jako liczba od 0 do 1.
 
 \item $\textbf{Schooling}$ - średni czas trwania edukacji podany w latach.
 
@@ -146,7 +146,7 @@ przeciw błonicy i krztuścowi wśród 1-latków podany w procentach.
         HDI & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 17 & 10 & 10 \\ \hline
         schooling & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 13 & 10 & 10 \\ \hline
     \end{tabular}
-    \caption{Liczba brakujących wartości dla każdej kolumny i dla każdego roku.}
+    \caption{Liczba brakujących wartości dla każdej kolumny i dla każdego roku. \label{tab:nany}}
 \end{table}
 \KOMAoptions{fontsize=12pt}
 
@@ -276,7 +276,7 @@ data[4:22] %>%
     \caption{Tabela korelacji Spearmana między oczekiwaną długością życia, a poszczególnymi zmiennymi dla lat 2008-2015.}
 \end{table}
 
-Możemy zauważyć, że rozrzut punktów na poszczególnych wykresach jest bardzo zróżnicowany. Na jednych wydaje się on być całkowicie losowy, natomiast na innych widać pewną zależność. Z tabeli korelacji odczytać możemy, że najsilniejszą ujemną zależność z oczekiwanym czasem życia mają zmienne związane ze śmiertelnością oraz niedowaga. Natomiast pozytywną korelację przejawiają zmienne takie jak BMI, zasięg szczepień na błonicę oraz polio, PKB, a w szczególności średni czas nauczania i wskaźnik rozwoju społecznego. Wysoka korelacja tego ostatniego nie jest zaskoczeniem, ponieważ wskaźnik ten jest wyliczany m. in. z oczekiwanego czasu życia, a więc wartości te naturalnie są od siebie zależne. Interesująca może być za to zależność pomiędzy czasem życia, a nauczaniem. Na wykresie punktowym zauważyć można między nimi liniową korelację. Z kolei, jeśli spojrzymy na wykres dotyczący PKB, na myśl przychodzi nam zależność logarytmiczna. Aby dokładniej zbadać te zależności, poddamy wspomniane zmienne głębszej analizie.
+Możemy zauważyć, że rozrzut punktów na poszczególnych wykresach jest bardzo zróżnicowany. Na jednych wydaje się on być całkowicie losowy, natomiast na innych widać pewną zależność. Z tabeli korelacji odczytać możemy, że najsilniejszą ujemną zależność z oczekiwanym czasem życia mają zmienne związane ze śmiertelnością oraz niedowagą. Natomiast pozytywną korelację przejawiają zmienne takie jak BMI, zasięg szczepień na błonicę oraz polio, PKB, a w szczególności średni czas nauczania i wskaźnik rozwoju społecznego. Wysoka korelacja tego ostatniego nie jest zaskoczeniem, ponieważ wskaźnik ten jest wyliczany m. in. z oczekiwanego czasu życia, a więc wartości te naturalnie są od siebie zależne. Interesująca może być za to zależność pomiędzy czasem życia, a nauczaniem. Na wykresie punktowym zauważyć można między nimi liniową korelację. Z kolei, jeśli spojrzymy na wykres dotyczący PKB, na myśl przychodzi nam zależność logarytmiczna. Aby dokładniej zbadać te zależności, poddamy wspomniane zmienne głębszej analizie.
 
 
 
@@ -329,15 +329,17 @@ Kształt histogramu jest zbliżony do krzywej gaussowskiej. Średnia wartość r
 ks.test(e, 'pnorm', 0, sd(e))
 ```
 
-Niech $\alpha = 0,05$ będzie poziomem istotności naszego testu. Wyznaczona p-wartość wynosi $p = 0,2532$. Ponieważ otrzymany wynik jest wystarczająco duży, to nie mamy podstaw do odrzucenia hipotezy zerowej i na zadanym poziomie istotności możemy przyjąć, że dane pochodzą z rozkładu normalnego $\mathcal{N}(0, 20.81)$. 
+Wyznaczona p-wartość wynosi $p = 0,2532$. Ponieważ otrzymany wynik jest wystarczająco duży, to nie mamy podstaw do odrzucenia hipotezy zerowej i możemy przyjąć, że dane pochodzą z rozkładu normalnego $\mathcal{N}(0, 20.81)$. 
 
-Analiza residuów jest niezwykle istotna, kiedy robimy predykcję danych. Znając rozkład szumu, możemy wyznaczyć przedziały ufności o danym poziomie istotności dla przewidywanych wyników. Innymi słowy możemy wyznaczyć prawdopodobieństwo z jakim predykowana wartość zmieści się w konkretnym przedziale. 
+|      Analiza residuów jest niezwykle istotna, kiedy decydujemy się robić predykcję danych. Znając rozkład błędów, możemy wyznaczyć przedziały ufności o danym poziomie istotności dla przewidywanych wyników. Innymi słowy możemy wyznaczyć prawdopodobieństwo z jakim predykowana wartość zmieści się w konkretnym przedziale. Wyniki, które otrzymaliśmy mogą być podstawą do wykonania takiej predykcji, jednak wcześniej należałoby jeszcze sprawdzić, czy residua są od siebie niezależne oraz czy ich wariancja jest stała.
+
+
 
 
 
 # 7. PKB państwa, a długość życia
 
-|      Podobnie jak w przypadku długości edukacji, będziemy analizować dane dotyczące PKB wyłącznie z 2015 roku. W przeciwieństwie do poprzedniego przypadku, dane te nie są zależne liniowo. Ich wykres punktowy kształtem przypomina bardziej zależność logarytmiczną. Sprawdźmy zatem, czy w rzeczywistości tak jest nakładając logarytm na wartości na osi X, czyli PKB.
+|      Podobnie jak w przypadku długości edukacji, będziemy analizować dane dotyczące PKB wyłącznie z 2015 roku. W przeciwieństwie do poprzedniego przypadku, dane te nie są zależne liniowo. Ich wykres punktowy kształtem przypomina bardziej zależność logarytmiczną. Sprawdźmy zatem, czy w rzeczywistości tak jest nakładając logarytm na wartości PKB.
 
 ```{r scatter_gdp_line, fig.cap="\\label{fig:scatter_gdp_line} Wykresy punktowe z surowych danych po lewej i z przetransformowanych po prawej.", fig.align="center", fig.width = 6, fig.height = 2}
 df2 <- data[(!is.na(data$GDP)) & (!is.na(data$life_expectancy)) & (data$year == 2015),]
@@ -353,7 +355,7 @@ plot_grid(scat2, scat2_mod)
 Możemy zauważyć, że dane po transformacji przypominają bardziej zależne liniowo, choć są dość mocno rozrzucone. Współczynnik korelacji Pearsona dla przetransformowanych danych wynosi 0.52. Przyjmnijmy model
 $$ Y_i = a\log(x_i) + b + \epsilon_i, $$
 gdzie $x_i$ są danymi z PKB, a $\epsilon_i$ są i.i.d. o średniej równej 0 i skończonej wariancji. Aby jednak otrzymać model lioniowy jak w punkcie 6, podstawiamy $z_i = \log(x_i)$ i otrzymujemy
-$$ Y_i = az_i + b. $$
+$$ Y_i = az_i + b + \epsilon_i. $$
 Teraz już możemy skorzystać z metody najmniejszych kwadratów, aby dopasować prostą regresji. W ten sposób otrzymujemy estymatory postaci
 $$
     \begin{cases}
@@ -389,7 +391,7 @@ Jak możemy zobaczyć, krzywa logarytmiczna w miarę pokrywa się z danymi, wię
 # 8. Możliwości dla Polski
 |      Wyniki przeprowadzonych analiz wykorzystamy, by określić co pozwoliłoby Polsce wydłużyć średni czas życia. Zacznijmy od porównania Polski z resztą świata. Rozważymy dane z 2015 roku - najnowsze, którymi dysponujemy. Średnia długość życia na globie wyniosła wtedy 71,62 lata. Mianem najdłużej żyjących ludzi mogli się wtedy poszczycić Słoweńcy z imponującą średnią życia aż 88 lat. Natomiast najkrócej żyjącymi ludźmi okazali się być obywatele Sierra Leony z wynikiem zaledwie 51 lat. Polacy osiągneli wynik 77.5 lat, co stawia nas na 42 miejscu w rankingu - wynik dobry, ale nie najlepszy.
 
-```{r barplot, fig.cap="\\label{fig:barplot} Porównanie oczekiwanej długości życia w Polsce z pięcioma najwyższymi wartościami oraz pięcioma najniższymi wartościami.", fig.width = 5, fig.height = 4, fig.align="center"}
+```{r barplot, fig.cap="\\label{fig:barplot} Porównanie oczekiwanej długości życia w Polsce z pięcioma najwyższymi wartościami, pięcioma najniższymi wartościami oraz średnią z całego świata (oznaczoną niebieską linią).", fig.width = 5, fig.height = 4, fig.align="center"}
 
 #średnia długość życia dla państw
 df <- data[data$year == 2015,]
@@ -407,7 +409,7 @@ bar2
 
 Zdefiniujmy statystykę $Z$ w następujący sposób
 $$ Z_X(x_0) = \frac{\#\left\{x \in X: x < x_0 \right\}}{\#X}. $$
-Mówi ona jaka część liczb ze zbioru $X$ jest poniżej wartości $x_0$. Wykorzystamy ją, by policzyć jaka część państw jest poniżej wartości każdej zmiennej dla Polski. Statystyki te wyliczymy dla roku 2014, ponieważ w roku 2015 występuje sporo braków danych.
+Mówi ona jaka część liczb ze zbioru $X$ jest poniżej wartości $x_0$. Wykorzystamy ją, by policzyć jaka część państw jest poniżej wartości każdej zmiennej dla Polski. Statystyki te wyliczymy dla roku 2014, ponieważ w roku 2015 występuje sporo braków danych, co widoczne jest w tabeli \ref{tab:nany}.
 
 \begin{table}[H]
     \centering
@@ -444,8 +446,8 @@ Natomiast zmiennymi skorelowanymi ujemnie są zmienne związane ze śmiertelnoś
 
 
 # 9. Podsumowanie
-|      Zestawienie danych, które postanowiliśmy przeanalizować okazało się być bardzo różnorodne, a do rozpatrzenia było wiele czynników. Jak się jednak okazało, nie wszystkie okazały się być aż tak istotne. Określiliśmy to na podstawie wykresów zależności między oczekiwaną długością życia, a poszczególnymi składowymi (wykres \ref{fig:scattery_le}). Na jednych wykresach była widoczna pewna zależność w danych, za to na innych dane były mocno rozproszone. Potwierdziliśmy nasze przypuszczenia dotyczące zależności wyliczając odpowiednie współczynniki korelacji. Jednym z najbardziej skorelowanych czynników z oczekiwaną długością życia okazał się być średni czas edukacji. Występuje tam zależność liniowa, a wraz ze wzrostem czasu poświęconego na naukę, wzrasta też średnia długość życia.
+|      Zestawienie danych, które postanowiliśmy przeanalizować okazało się być bardzo różnorodne, a do rozpatrzenia było wiele czynników. Nie wszystkie jednak były aż tak istotne. Określiliśmy to na podstawie wykresów punktowych między oczekiwaną długością życia, a poszczególnymi zmiennymi (wykres \ref{fig:scattery_le}). Na jednych wykresach była widoczna pewna zależność w danych, za to na innych dane były mocno rozproszone. Potwierdziliśmy nasze przypuszczenia dotyczące zależności wyliczając odpowiednie współczynniki korelacji. Jednym z czynników najbardziej skorelowanych z oczekiwaną długością życia okazał się być średni czas edukacji. Na podstawie wyników analizy, wraz ze wzrostem czasu poświęconego na naukę, wzrasta też oczekiwana długość życia.
 
-|      Następnie porównaliśmy średnią długość życia Polski z pozostałymi krajami. W 2015 roku osiągneliśmy wynik 77,5 lat - większy od średniej o niemal 6 lat i całościowo jest to 42 najwyższy wynik (wykres \ref{fig:barplot}). Trochę nam jednak brakuje do liderów rankingu jakim są Słoweńcy z imponującym wynikiem 88 lat. Przeanalizowaliśmy jakie rezultaty w poszczególnych kategoriach osiąga Polska na tle reszty państw i na tej podstawie pokazaliśmy co można byłoby zrobić, aby poprawić średni czas życia Polaków.
+|       Następnie porównaliśmy średnią długość życia Polaków z obywatelami pozostałych krajów. W 2015 roku osiągneliśmy wynik 77,5 lat - większy od średniej o niemal 6 lat i całościowo jest to 42 najwyższy wynik (wykres \ref{fig:barplot}). Trochę nam jednak brakuje do liderów rankingu jakim są Słoweńcy z wynikiem 88 lat. Przeanalizowaliśmy jakie rezultaty w poszczególnych kategoriach osiąga Polska na tle reszty państw i na tej podstawie pokazaliśmy, co można byłoby zrobić, aby poprawić nasze wyniki.
 
-|      Okazało się, że statystyki związane ze śmiertelnością u dzieci, oraz niedowagą są w Polsce bardzo niekorzystne. Rozwiązaniem, które mogłoby poprawić nasz wynik byłaby więc walka z niedowagą, oraz zredukowanie śmiertelności u dzieci. Są też takie charakterystyki, gdzie osiągamy naprawdę dobre rezultaty, jak chociażby w długości edukacji. Nie jest to jednak powód do tego, aby rezygnować z inwestowania w oświatę, ponieważ została pokazana ścisła zależność między oczekiwaną długością życia a szkolnictwem. Stąd inwestowanie w naukę jest również niezwykle istotne, jeżeli chcemy żyć dłużej.
+|      Okazało się, że statystyki związane ze śmiertelnością u dzieci, oraz niedowagą są w Polsce bardzo niekorzystne. Rozwiązaniem, które mogłoby poprawić nasz wynik byłaby więc walka z niedowagą, oraz zredukowanie śmiertelności u dzieci. Są też takie charakterystyki, gdzie osiągamy naprawdę dobre rezultaty, jak chociażby długość edukacji. Nie jest to jednak powód do tego, aby rezygnować z inwestowania w oświatę, ponieważ została pokazana ścisła zależność między oczekiwaną długością życia, a szkolnictwem. Stąd inwestowanie w naukę jest również niezwykle istotne.
