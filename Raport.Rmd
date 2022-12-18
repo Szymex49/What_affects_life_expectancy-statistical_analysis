@@ -53,25 +53,26 @@ data2015 <- data %>% filter(year == 2015)
 
 \item $\textbf{Adult mortality}$ - mówi nam o śmiertelności wśród osób dorosłych. Podane wartości oznaczają liczbę zgonów osób między 15, a 60 rokiem życia przypadającą na 1000 osób.
 
-\item $\textbf{Infant deaths}$ - oznacza śmiertelność wśród niemowląt/dzieci. Również podana w liczbie śmierci przypadającej na 1000 osób.
+\item $\textbf{Infant deaths}$ - oznacza śmiertelność wśród niemowląt/dzieci. Podana w liczbie zgonów na 1000 osób.
 
-\item $\textbf{Alcohol}$ - przeciętna konsumpcja alkoholu u osób powyżej 15 roku życia w ciągu roku. Podana jako liczba czystego alkoholu w litrach.
+\item $\textbf{Alcohol}$ - przeciętna konsumpcja alkoholu u osób powyżej 15 roku życia w ciągu roku. Podana jako spożycie czystego alkoholu w litrach.
 
-\item $\textbf{Percentage expenditure}$ - wydatki na zdrowie jako procent PKB per capita.
+\item $\textbf{Percentage expenditure}$ - wydatki na zdrowie jako procent PKB na osobę.
 
-\item $\textbf{Hepatitis B}$ - odporność na zapalenie wątroby typu B wśród 1-latków podana w procentach.
+\item $\textbf{Hepatitis B}$ - zasięg szczepień przeciw zapaleniu wątroby typu B wśród 1-latków podana w procentach.
 
-\item $\textbf{Measles}$ - liczba zanotowanych przypadków Odry na 1000 osób. 
+\item $\textbf{Measles}$ - liczba zanotowanych przypadków odry na milion osób. 
 
 \item $\textbf{BMI}$ - przeciętny indeks BMI całej populacji danego kraju.
 
-\item $\textbf{Under-five deaths}$ - liczba zgonów osób w wieku poniżej 5 lat na milion osób.
+\item $\textbf{Under-five deaths}$ - liczba zgonów osób w wieku poniżej 5 lat na tysiąc osób.
 
-\item $\textbf{Polio}$ - odporność na polio wśród 1-latków podana w procentach.
+\item $\textbf{Polio}$ - zasięg szczepień przeciw polio wśród 1-latków podana w procentach.
 
 \item $\textbf{Total expenditure}$ - wydatki rządu na zdrowie jako procent wszystkich wydatków.
 
-\item $\textbf{Diphtheria}$ - odporność na błonicę wśród 1-latków podana w procentach.
+\item $\textbf{Diphtheria}$ - zasięg szczepień 
+przeciw błonicy i krztuścowi wśród 1-latków podana w procentach.
 
 \item $\textbf{HIV/AIDS}$ - ilość zgonów na HIV/AIDS wśród niemowlaków (0-4 lata) na 1000 osób.
 
@@ -79,13 +80,13 @@ data2015 <- data %>% filter(year == 2015)
 
 \item $\textbf{Population}$ - populacja danego kraju.
 
-\item $\textbf{Thinness 1-19 years}$ - proporcja osób chudych wśród osób w wieku 10-19 lat. Wyrażona w procentach.
+\item $\textbf{Thinness 1-19 years}$ - proporcja osób z niedowagą wśród osób w wieku 10-19 lat. Wyrażona w procentach.
 
-\item $\textbf{Thinness 5-9 years}$ - proporcja osób chudych wśród osób w wieku 5-9 lat. Wyrażona w procentach.
+\item $\textbf{Thinness 5-9 years}$ - proporcja osób z niedowagą wśród osób w wieku 5-9 lat. Wyrażona w procentach.
 
 \item $\textbf{Income composition of resources}$ - wskaźnik rozwoju społecznego. Podany jako liczba od 0 do 1.
 
-\item $\textbf{Schooling}$ - czas trwania edukacji podany w latach.
+\item $\textbf{Schooling}$ - średni czas trwania edukacji podany w latach.
 
 \end{itemize}
 
