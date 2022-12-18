@@ -53,7 +53,7 @@ regression <- function(X, Y, xlabel="", ylabel="", display_plot=TRUE){
 
 
 
-# Wstęp
+# 1. Wstęp
 <!-- Akapit - 6 spacji -->
 |      Celem niniejszej pracy jest przeanalizowanie, jak poszczególne czynniki zewnętrzne wpływają na długość naszego życia. Do analizy posłużymy się zbiorem danych charakteryzującym wiele państw świata pod kilkoma aspektami, takimi jak średni czas edukacji, spożycie alkoholu, czy powszechność szczepień na poszczególne choroby. Dane dostępne są [$\color{blue}{\text{tutaj}}$](https://www.kaggle.com/datasets/kumarajarshi/life-expectancy-who?fbclid=IwAR2HtwUPyioM4tHmuae7B2owTUB8q3XlmpP12LbTM9NYDsi4qtaWGOYoNDE). Postaramy się odpowiedzieć na pytanie, co najlepiej wpływa na długość życia, a co wręcz przeciwnie. Wnioski wyciągnięte z analizy wyskorzystamy, by znaleźć dla Polski możliwe drogi do zwiększenia średniego czasu życia jej obywateli.
 
@@ -61,7 +61,7 @@ regression <- function(X, Y, xlabel="", ylabel="", display_plot=TRUE){
 
 
 
-# Opis danych
+# 2. Opis danych
 |      Poniżej zostały opisane wszystkie kolumny znajdujące się w badanych danych.
 \begin{itemize}
 
@@ -116,7 +116,7 @@ przeciw błonicy i krztuścowi wśród 1-latków podana w procentach.
 
 
 
-# Brakujące dane
+# 3. Brakujące dane
 |      Zanim przejdziemy do analizy naszych danych, sprawdźmy, czy zawierają one jakieś braki. W tym celu zliczamy wszystkie brakujące wartości dla każdej zmiennej liczbowej w każdym roku.
 
 \begin{table}[H]
@@ -151,7 +151,7 @@ przeciw błonicy i krztuścowi wśród 1-latków podana w procentach.
 
 
 
-# Porównanie krajów rozwiniętych i rozwijających się
+# 4. Porównanie krajów rozwiniętych i rozwijających się
 |      Spodziewamy się, że w krajach lepiej rozwiniętych długość życia jest większa niż w krajach uboższych. Żeby przekonać się, czy w rzeczywistości tak jest, porównamy średnie dla obu typów krajów dla każdego roku. Ponieważ państwa zawarte w danych znacznie różnią się populacją, nie możemy traktować ich na równi. Z tego powodu skorzystamy z średniej ważonej, gdzie wagami będą populacje.
 
 ```{r le_dd, fig.cap="\\label{fig:le_dd} Porównanie średniej długości życia dla krajów wysoko i słabo rozwiniętych", fig.align="center", fig.width = 5, fig.height = 3}
@@ -203,7 +203,7 @@ Na obu wykresach zauważyć można, że państwa lepiej rozwinięte wyróżniaj�
 
 
 
-# Analiza
+# 5. Analiza
 |      Jednym z głównych celów raportu jest sprawdzenie, które czynniki mają największy wpływ na długość życia. Dobrym początkiem będzie narysowanie wykresów punktowych długości życia od poszczególnych zmiennych. Wykresy takie dają wgląd na to, jak zachowują się dane oraz pozwalają ocenić, czy występuje między nimi jakaś zależność. Dodatkowo skorzystamy ze współczynnika korelacji Spearmana, ponieważ jest to miara monotonicznej zależności, a właśnie takiej zależności szukamy. Wspomnianą korelację obliczymy między długością życia, a pozostałymi zmiennymi liczbowymi dla każdego roku z osobna.
 
 ```{r scattery_le, fig.cap="\\label{fig:scattery_le} Wykresy punktowe oczekiwanej długości życia od poszczególnych zmiennych.", fig.align="center", fig.width = 5, fig.height = 8}
@@ -245,7 +245,7 @@ Możemy zauważyć, że rozrzut punktów na poszczególnych wykresach jest bardz
 
 
 
-# Wpływ edukacji na długość życia
+# 6. Wpływ edukacji na długość życia
 |      Jako pierwszy przeanalizujemy wpływ czasu edukacji na oczekiwaną długość życia. W tym przypadku rozważymy dane wyłącznie z 2015 roku, czyli te najbardziej aktualne. Na wykresie \ref{fig:scatter_schooling} można zauważyć liniową zależność danych, zatem do zbadania korelacji możemy użyć współczynnika Pearsona. Przyjmuje on wartość $R \approx 0,752$, więc jest to dość mocna korelacja. Dopasujemy teraz do danych prostą regresji korzystając z metody najmniejszych kwadratów. Metoda ta polega na znalezieniu takich współczynników $a, b$ dla których funkcja
 $$S(a,b) = \sum_{i = 1}^n (y_i - ax_i - b)^2$$
 przyjmuje wartość najmniejszą. Rozwiązaniem jest para estymatorów
@@ -296,9 +296,9 @@ Niech $\alpha = 0,05$ będzie poziomem istotności naszego testu. Wyznaczona p-w
 
 
 
-# PKB państwa, a długość życia
+# 7. PKB państwa, a długość życia
 
-Podobnie jak w przypadku długości edukacji, będziemy analizować dane dotyczące PKB wyłącznie z 2015 roku. W przeciwieństwie do poprzedniego przypadku, dane te nie mają zależności liniowej, a kształtem przypomina bardziej logarytmiczną. W tym celu, zrobimy transformację danych do postaci liniowej, żeby móc później skorzystać z metody najmniejszych kwadratów. Innymi słowy $\tilde{x} = \log(x)$
+|      Podobnie jak w przypadku długości edukacji, będziemy analizować dane dotyczące PKB wyłącznie z 2015 roku. W przeciwieństwie do poprzedniego przypadku, dane te nie są zależne liniowo. Ich wykres punktowy kształtem przypomina bardziej zależność logarytmiczną. Sprawdźmy zatem, czy w rzeczywistości tak jest nakładając logarytm na wartości na osi X, czyli PKB.
 
 ```{r scatter_gdp_line, fig.cap="\\label{fig:scatter_gdp_line} Wykresy punktowe z surowych danych po lewej i z przetransformowanych po prawej.", fig.align="center", fig.width = 6, fig.height = 2}
 df2 <- data[(!is.na(data$GDP)) & (!is.na(data$life_expectancy)) & (data$year == 2015),]
@@ -311,8 +311,11 @@ scat2_mod <- ggplot(data = df2, mapping = aes(x = log(GDP), y = life_expectancy)
 plot_grid(scat2, scat2_mod)
 ```
 
-
-Następnie dopasowujemy prostą regresji z MNK. Ostatecznie wykonujemy transformację odwrotną dla danych, wraz z wyznaczoną prostą, co w rezultacie da krzywą logarytmiczną dopasowaną do danych.
+Możemy zauważyć, że dane po transformacji przypominają bardziej zależne liniowo, choć są dość mocno rozrzucone. Współczynnik korelacji Pearsona dla przetransformowanych danych wynosi 0.52. Przyjmnijmy model
+$$ Y_i = a\log(x_i) + b + \epsilon_i, $$
+gdzie $x_i$ są danymi z PKB, a $\Epsilon_i$ są i.i.d. o średniej równej 0 i skończonej wariancji. Aby jednak otrzymać model lioniowy jak w punkcie 6, podstawiamy $z_i = log(x_i)$ i otrzymujemy
+$$ Y_i = az_i + b. $$
+Teraz juz możemy skorzystać z metody najmniejszych kwadratów, aby dopasować prostą regresji. Ostatecznie wykonujemy transformację odwrotną dla danych, wraz z wyznaczoną prostą, co w rezultacie da krzywą logarytmiczną dopasowaną do danych.
 
 ```{r reg_gdp_final, fig.cap="\\label{fig:reg_gdp_final} Po lewej prosta regresji dla przetransformowanych danych. Po prawej krzywa regresji dopasowana do oryginalnych danych.", fig.align="center", fig.width =6, fig.height = 2}
 c(a1, b1) %<-% regression(log(df2$GDP), df2$life_expectancy, display_plot=FALSE)
@@ -346,7 +349,7 @@ ggplot(data.frame(e = e), aes(e)) +
 ```{r, echo = FALSE, eval = FALSE}
 ks.test(e, 'pnorm', 0, sd(e))
 ```
-Jak pokazuje wynik p-wartość $p = 0,9126$ jest znacznie większa od poziomu istotności $\alpha$. Nie mamy zatem podstaw do odrzucenia hipotezy o braku normalności tego rozkładu. Możemy zatem przyjąć, że rozkład residuów jest rozkładem normalnym $\mathcal{N}(\mu_e, \sigma_e) = \mathcal{N}(0, 7,07)$.
+Jak pokazuje wynik p-wartość $p = 0,9126$ jest znacznie większa od poziomu istotności $\alpha$. Nie mamy zatem podstaw do odrzucenia hipotezy o braku normalności tego rozkładu. Możemy zatem przyjąć, że rozkład residuów jest rozkładem normalnym $\mathcal{N}(\mu_e, \sigma_e) = \mathcal{N}(0, 7.07)$.
 
 
 
