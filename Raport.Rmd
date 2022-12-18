@@ -11,7 +11,7 @@ output:
 \raggedbottom
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, eval = TRUE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, eval = TRUE, fig.pos = "H")
 ```
 
 ```{r}
@@ -55,14 +55,14 @@ regression <- function(X, Y, xlabel="", ylabel="", display_plot=TRUE){
 
 # Wstęp
 <!-- Akapit - 6 spacji -->
-|      W niniejszej pracy chcielibyśmy przeanalizować, jak poszczególne czynniki zewnętrzne wpływają na długość naszego życia. Jak się okazuje, jedne z nich są poważnym problemem, podczas gdy inne w niewielkim stopniu przyczyniają się na długość życia. Do analizy posłużymy się zbiorem danych charakteryzującym wiele państw świata pod kilkoma aspektami, między innymi takimi jak jakość edukacji, spożycie alkoholu, czy zapadalność na poszczególne choroby. Link do danych znajduje się [$\color{blue}{\text{tutaj}}$](https://www.kaggle.com/datasets/kumarajarshi/life-expectancy-who?fbclid=IwAR2HtwUPyioM4tHmuae7B2owTUB8q3XlmpP12LbTM9NYDsi4qtaWGOYoNDE).
+|      Celem niniejszej pracy jest przeanalizowanie, jak poszczególne czynniki zewnętrzne wpływają na długość naszego życia. Do analizy posłużymy się zbiorem danych charakteryzującym wiele państw świata pod kilkoma aspektami, takimi jak średni czas edukacji, spożycie alkoholu, czy powszechność szczepień na poszczególne choroby. Dane dostępne są [$\color{blue}{\text{tutaj}}$](https://www.kaggle.com/datasets/kumarajarshi/life-expectancy-who?fbclid=IwAR2HtwUPyioM4tHmuae7B2owTUB8q3XlmpP12LbTM9NYDsi4qtaWGOYoNDE). Postaramy się odpowiedzieć na pytanie, co najlepiej wpływa na długość życia, a co wręcz przeciwnie. Wnioski wyciągnięte z analizy wyskorzystamy, by znaleźć dla Polski możliwe drogi do zwiększenia średniego czasu życia jej obywateli.
 
 
 
 
 
 # Opis danych
-|      Przed rozpoczęciem głównej analizy omówimy krótko, o czym nam mówi każda kolumna w tabeli danych.
+|      Poniżej zostały opisane wszystkie kolumny znajdujące się w badanych danych.
 \begin{itemize}
 
 \item $\textbf{Country}$ - kolumna ta zawiera nazwy państw, które zostały uwzględnione w zbiorze danych. W sumie są to 193 różne państwa.
@@ -75,7 +75,7 @@ regression <- function(X, Y, xlabel="", ylabel="", display_plot=TRUE){
 
 \item $\textbf{Adult mortality}$ - mówi nam o śmiertelności wśród osób dorosłych. Podane wartości oznaczają liczbę zgonów osób między 15, a 60 rokiem życia przypadającą na 1000 osób.
 
-\item $\textbf{Infant deaths}$ - oznacza śmiertelność wśród niemowląt/dzieci. Podana w liczbie zgonów na 1000 osób.
+\item $\textbf{Infant deaths}$ - oznacza śmiertelność wśród niemowląt. Podana w liczbie zgonów na 1000 osób.
 
 \item $\textbf{Alcohol}$ - przeciętna konsumpcja alkoholu u osób powyżej 15 roku życia w ciągu roku. Podana jako spożycie czystego alkoholu w litrach.
 
@@ -87,7 +87,7 @@ regression <- function(X, Y, xlabel="", ylabel="", display_plot=TRUE){
 
 \item $\textbf{BMI}$ - przeciętny indeks BMI całej populacji danego kraju.
 
-\item $\textbf{Under-five deaths}$ - liczba zgonów osób w wieku poniżej 5 lat na tysiąc osób.
+\item $\textbf{Under-five deaths}$ - liczba zgonów dzieci w wieku poniżej 5 lat na tysiąc osób.
 
 \item $\textbf{Polio}$ - zasięg szczepień przeciw polio wśród 1-latków podana w procentach.
 
@@ -106,7 +106,7 @@ przeciw błonicy i krztuścowi wśród 1-latków podana w procentach.
 
 \item $\textbf{Thinness 5-9 years}$ - proporcja osób z niedowagą wśród osób w wieku 5-9 lat. Wyrażona w procentach.
 
-\item $\textbf{Income composition of resources}$ - wskaźnik rozwoju społecznego. Podany jako liczba od 0 do 1.
+\item $\textbf{Income composition of resources}$ - wskaźnik rozwoju społecznego (HDI). Podany jako liczba od 0 do 1.
 
 \item $\textbf{Schooling}$ - średni czas trwania edukacji podany w latach.
 
@@ -114,28 +114,38 @@ przeciw błonicy i krztuścowi wśród 1-latków podana w procentach.
 
 
 
+
+
 # Brakujące dane
 |      Zanim przejdziemy do analizy naszych danych, sprawdźmy, czy zawierają one jakieś braki. W tym celu zliczamy wszystkie brakujące wartości dla każdej zmiennej liczbowej w każdym roku.
 
-```{r tabela_na, fig.cap="\\label{fig:tabela_na} Liczba brakujących wartości dla każdej zmiennej liczbowej w każdym roku."}
-nans <- data.frame()
-years <- sort(unique(data$year))
-for (y in years) {
-    data_year <- data %>% filter(year == y)
-    ns <- c()
-    for (column in colnames(data_year[4:22])) {
-        n <- sum(is.na(data_year[column]))
-        ns <- append(ns, n)
-    }
-    nans <- rbind(nans, ns)
-}
-nans <- cbind(years, nans)
-names(nans) <- colnames(data[c(2, 4:22)])
-df <- data.frame(t(nans))
-names(df) <- lapply(df[1, ], as.character)
-df <- df[-1,1:16]
-kable(df)
-```
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+         & \textbf{00} & \textbf{01} & \textbf{02} & \textbf{03} & \textbf{04} & \textbf{05} & \textbf{06} & \textbf{07} & \textbf{08} & \textbf{09} & \textbf{10} & \textbf{11} & \textbf{12} & \textbf{13} & \textbf{14} & \textbf{15} \\ \hline
+        \textbf{life exp.} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 10 & 0 & 0 \\ \hline
+        \textbf{adult mortality} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 10 & 0 & 0 \\ \hline
+        \textbf{infant deaths} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+        \textbf{alcohol} & 1 & 1 & 1 & 1 & 1 & 2 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 2 & 1 & 177 \\ \hline
+        \textbf{per. exp.} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+        \textbf{hepatitis B} & 98 & 88 & 70 & 52 & 45 & 36 & 32 & 24 & 20 & 17 & 15 & 13 & 13 & 11 & 10 & 9 \\ \hline
+        \textbf{measles} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+        \textbf{BMI} & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 4 & 2 & 2 \\ \hline
+        \textbf{under 5 deaths} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+        \textbf{polio} & 3 & 3 & 2 & 2 & 2 & 2 & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\ \hline
+        \textbf{total exp.} & 4 & 4 & 4 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 2 & 2 & 2 & 181 \\ \hline
+        \textbf{diphtheria} & 3 & 3 & 2 & 2 & 2 & 2 & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\ \hline
+        \textbf{HIV AIDS} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+        \textbf{GDP} & 29 & 28 & 28 & 28 & 27 & 27 & 27 & 27 & 27 & 27 & 27 & 27 & 29 & 33 & 28 & 29 \\ \hline
+        \textbf{population} & 40 & 40 & 40 & 40 & 40 & 40 & 40 & 40 & 40 & 40 & 40 & 40 & 41 & 49 & 41 & 41 \\ \hline
+        \textbf{thinness 1-19 y} & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 4 & 2 & 2 \\ \hline
+        \textbf{thinness 5-9 y} & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 4 & 2 & 2 \\ \hline
+        \textbf{HDI} & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 17 & 10 & 10 \\ \hline
+        \textbf{schooling} & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 10 & 13 & 10 & 10 \\ \hline
+    \end{tabular}
+    \caption{Liczba brakujących wartości dla każdej kolumny i dla każdego roku.}
+\end{table}
 
 
 
@@ -202,7 +212,7 @@ data[4:22] %>%
   ggplot(aes(x = value, y = life_expectancy)) +
     geom_point(size=0.4, alpha=0.4, col='#0575d0', stroke=0) +
     facet_wrap(~ var, scales='free', nrow=6) +
-    xlab("") +
+    theme(axis.title.x=element_blank()) +
     scale_x_discrete() +
     scale_y_discrete() + theme(
     plot.title = element_text(hjust = 0.5, size = 24),
@@ -233,9 +243,9 @@ Możemy zauważyć, że rozrzut punktów na poszczególnych wykresach jest bardz
 
 
 
-\newpage
 
-### Edukacja
+
+# Wpływ edukacji na długość życia
 |      Jako pierwszy przeanalizujemy wpływ czasu edukacji na oczekiwaną długość życia. W tym przypadku rozważymy dane wyłącznie z 2015 roku, czyli te najbardziej aktualne. Na wykresie \ref{fig:scatter_schooling} można zauważyć liniową zależność danych, zatem do zbadania korelacji możemy użyć współczynnika Pearsona. Przyjmuje on wartość $R \approx 0,752$, więc jest to dość mocna korelacja. Dopasujemy teraz do danych prostą regresji korzystając z metody najmniejszych kwadratów. Metoda ta polega na znalezieniu takich współczynników $a, b$ dla których funkcja
 $$S(a,b) = \sum_{i = 1}^n (y_i - ax_i - b)^2$$
 przyjmuje wartość najmniejszą. Rozwiązaniem jest para estymatorów
@@ -253,7 +263,7 @@ df <- data[(!is.na(data$schooling)) & (!is.na(data$life_expectancy)) & (data$yea
 regression(df$schooling, df$life_expectancy, "Lata nauki", "Długość życia")
 ```
 
-\newpage
+
 Kolejnym punktem będzie analiza residuów (błędów)
 $$e_i = y_i - \hat{y}_i\;,$$
 gdzie $\hat{y}_i = \hat{a}x_i + \hat{b}$. W celu zbadania rozkładu residuów, spójrzmy na ich histogram
@@ -283,18 +293,25 @@ ks.test(e, 'pnorm', 0, sd(e))
 Niech $\alpha = 0,05$ będzie poziomem istotności naszego testu. Wyznaczona p-wartość wynosi $p = 0,2532$. Ponieważ otrzymany wynik jest wystarczająco duży, to nie mamy podstaw do odrzucenia hipotezy zerowej i na zadanym poziomie istotności możemy przyjąć, że dane pochodzą z rozkładu normalnego $\mathcal{N}(0, 20.81)$. 
 
 
-### PKB
+
+
+
+# PKB państwa, a długość życia
 
 Podobnie jak w przypadku długości edukacji, będziemy analizować dane dotyczące PKB wyłącznie z 2015 roku. W przeciwieństwie do poprzedniego przypadku, dane te nie mają zależności liniowej, a kształtem przypomina bardziej logarytmiczną. W tym celu, zrobimy transformację danych do postaci liniowej, żeby móc później skorzystać z metody najmniejszych kwadratów. Innymi słowy $\tilde{x} = \log(x)$
 
 ```{r scatter_gdp_line, fig.cap="\\label{fig:scatter_gdp_line} Wykresy punktowe z surowych danych po lewej i z przetransformowanych po prawej.", fig.align="center", fig.width = 6, fig.height = 2}
 df2 <- data[(!is.na(data$GDP)) & (!is.na(data$life_expectancy)) & (data$year == 2015),]
-scat2 <- ggplot(data = df2, mapping = aes(x = GDP, y = life_expectancy)) + geom_point()
-scat2_mod <- ggplot(data = df2, mapping = aes(x = log(GDP), y = life_expectancy)) + geom_point()
+scat2 <- ggplot(data = df2, mapping = aes(x = GDP, y = life_expectancy)) + geom_point(alpha=0.5) + 
+  xlab("PKB") +
+  ylab("Długość życia")
+scat2_mod <- ggplot(data = df2, mapping = aes(x = log(GDP), y = life_expectancy)) + geom_point(alpha=0.5) +
+  xlab("log(PKB)") +
+  theme(axis.title.y = element_blank())
 plot_grid(scat2, scat2_mod)
 ```
 
-\newpage
+
 Następnie dopasowujemy prostą regresji z MNK. Ostatecznie wykonujemy transformację odwrotną dla danych, wraz z wyznaczoną prostą, co w rezultacie da krzywą logarytmiczną dopasowaną do danych.
 
 ```{r reg_gdp_final, fig.cap="\\label{fig:reg_gdp_final} Po lewej prosta regresji dla przetransformowanych danych. Po prawej krzywa regresji dopasowana do oryginalnych danych.", fig.align="center", fig.width =6, fig.height = 2}
@@ -331,9 +348,12 @@ ks.test(e, 'pnorm', 0, sd(e))
 ```
 Jak pokazuje wynik p-wartość $p = 0,9126$ jest znacznie większa od poziomu istotności $\alpha$. Nie mamy zatem podstaw do odrzucenia hipotezy o braku normalności tego rozkładu. Możemy zatem przyjąć, że rozkład residuów jest rozkładem normalnym $\mathcal{N}(\mu_e, \sigma_e) = \mathcal{N}(0, 7,07)$.
 
-\newpage
 
-# Polska
+
+
+
+
+# Możliwości dla Polski
 |      Wyniki przeprowadzonych analiz wykorzystamy, by określić co pozwoliłoby Polsce wydłużyć średni czas życia. Zacznijmy od porównania Polski z resztą świata. Rozważymy dane z 2015 roku - najnowsze, którymi dysponujemy. Średnia długość życia na globie wyniosła wtedy 71,62 lata. Mianem najdłużej żyjących ludzi mogli się wtedy poszczycić Słoweńczycy z imponującą średnią życia aż 88 lat. Natomiast najkrócej żyjącymi ludźmi okazali się być obywatele Sierra Leony z wynikiem zaledwie 51 lat. Polacy osiągneli wynik 77.5 lat, co stawia nas na 42 miejscu w rankingu - wynik dobry, ale nie najlepszy.
 
 ```{r barplot, fig.cap="\\label{fig:barplot} Porównanie oczekiwanej długości życia w Polsce z pięcioma najwyższymi wartościami oraz pięcioma najniższymi wartościami.", fig.width = 5, fig.height = 4, fig.align="center"}
@@ -351,11 +371,11 @@ bar2 <- ggplot(data = rbind(head(df, 5), df[df$country == 'Poland',], tail(df, 5
 bar2
 ```
 
-\newpage
+
 Zdefiniujmy statystykę $Z$ w następujący sposób
 $$ Z_X(x_0) = \frac{\#\left\{x \in X: x < x_0 \right\}}{\#X}. $$
 Mówi ona jaka część liczb ze zbioru $X$ jest poniżej wartości $x_0$. Wykorzystamy ją, by policzyć jaka część państw jest poniżej wartości każdej zmiennej dla Polski. Statystyki te wyliczymy dla roku 2014, ponieważ w roku 2015 występuje sporo braków danych.
-\newpage
+
 
 ```{r polska_porownanie}
 pol <- data2014 %>% filter(country == "Poland")
@@ -376,6 +396,9 @@ Przypomnijmy, że zmienne wpływające pozytywnie na długość życia to BMI, z
 Natomiast zmiennymi skorelowanymi ujemnie są zmienne związane ze śmiertelnością oraz niedowagą. W tabeli zobaczymy, że śmiertelność u dorosłych w Polsce jest bardzo niska, jednak śmiertelność w przypadku niemowląt i dzieci poniżej 5-tego roku życia stawia nasze państwo mniej więcej po środku w stosunku do reszty świata. Z kolei watości statystyki $Z$ dla kolumn dotyczących niedowagi mieszczą się w okolicach 0.35, co także nie jest najlepszym wynikiem. Dobrą strategią byłoby zatem zapobieganie zgonów u małych dzieci w pierwszej kolejności, a następnie walka z niedowagą.
 
 Wartość statystyki $Z$ dla średniego czasu edukacji wynosi 0.91, co stawia Polskę bardzo wysoko. Nie jest to jednak argument za tym, by zaprzestać inwestowanie w nauczanie. Jak zostało pokazane wcześniej, edukacja ma duży wpływ na długość życia. W Polsce średni czas nauczania w 2014 roku wynosił 16.4 lat. Przypuśćmy, że czas ten zostałby wydłużony do 18 lat. Skorzystamy teraz z wcześniej wyznaczonej regresji liniowej dla zależności pomiędzy czasem nauki, a czasem życia, by wyznaczyć przedział ufności.
+
+
+
 
 
 # Podsumowanie
