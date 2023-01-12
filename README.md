@@ -1,7 +1,7 @@
-# Pakiety statystyczne - raport 1
+# What influences life expectancy - statistical analysis
  
-### Raport przygotowali:
+### Authors:
 Szymon Malec <br>
 Michał Wiktorowski
  
-### Opis
+### Description
