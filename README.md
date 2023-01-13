@@ -1,4 +1,4 @@
-# What influences life expectancy - statistical analysis
+# What affects life expectancy - statistical analysis
  
 ### Authors
 Szymon Malec <br>
