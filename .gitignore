@@ -3,5 +3,4 @@
 .ipynb_checkpoints
 *.aux
 *.out
-*.pdf
 *.log
